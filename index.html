@@ -6,7 +6,8 @@
   <title>サク KYOTO | LOOKBOOK</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+  
   <style>
     /* ------------------------------------------
        ベースリセット・共通設定
@@ -16,6 +17,12 @@
       margin: 0;
       padding: 0;
     }
+    html.lenis { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+    .lenis.lenis-scrolling iframe { pointer-events: none; }
+
     body {
       background-color: #faf9f5;
       color: #2b2b2b;
@@ -23,498 +30,232 @@
       line-height: 1.8;
       letter-spacing: 0.05em;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; }
 
     /* ------------------------------------------
-       ヘッダー
+       ローディング画面（シネマティック演出）
+    ------------------------------------------ */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: #faf9f5;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1.2s cubic-bezier(0.7, 0, 0.3, 1), visibility 1.2s ease;
+    }
+    #preloader .loader-logo {
+      font-family: 'Cormorant Garamond', 'Shippori Mincho', serif;
+      font-size: 22px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: pulseLogo 2s infinite ease-in-out;
+    }
+    @keyframes pulseLogo {
+      0% { opacity: 0.3; transform: scale(0.98); }
+      50% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0.3; transform: scale(0.98); }
+    }
+    .loaded #preloader { opacity: 0; visibility: hidden; }
+
+    /* ------------------------------------------
+       ヘッダー（すりガラス・追従）
     ------------------------------------------ */
     .site-header {
-      padding: 40px 20px 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 30px 20px;
       text-align: center;
-      background-color: #faf9f5;
+      background: rgba(250, 249, 245, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 100;
+      transition: padding 0.5s ease, border-bottom 0.5s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .scrolled .site-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
     }
     .brand-logo {
       font-family: 'Cormorant Garamond', 'Shippori Mincho', serif;
-      font-size: 26px;
+      font-size: 24px;
       letter-spacing: 0.25em;
       font-weight: 500;
       text-transform: uppercase;
     }
 
     /* ------------------------------------------
+       スクロール表示アニメーション（ふわっと浮かび上がる）
+    ------------------------------------------ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1), transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .fade-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ------------------------------------------
        コンセプトセクション
     ------------------------------------------ */
     .concept-section {
-      padding: 50px 24px 70px;
+      padding: 180px 24px 100px; /* ヘッダー固定分の余白確保 */
       text-align: center;
       max-width: 780px;
       margin: 0 auto;
     }
     .concept-title {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 500;
-      letter-spacing: 0.18em;
-      margin-bottom: 16px;
+      letter-spacing: 0.2em;
+      margin-bottom: 24px;
     }
     .concept-lead {
-      font-size: 15px;
-      color: #666;
-      margin-bottom: 36px;
-      letter-spacing: 0.08em;
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 48px;
+      letter-spacing: 0.1em;
     }
     .concept-ja {
       font-size: 16px;
-      line-height: 2.2;
-      margin-bottom: 32px;
-      letter-spacing: 0.08em;
+      line-height: 2.4;
+      margin-bottom: 40px;
+      letter-spacing: 0.1em;
+      color: #111;
     }
     .concept-en {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 16px;
-      color: #555;
+      font-size: 17px;
+      color: #666;
       font-style: italic;
-      line-height: 1.9;
-      letter-spacing: 0.04em;
+      line-height: 2;
+      letter-spacing: 0.05em;
     }
 
     /* ------------------------------------------
        ルックブック（メイソンリーギャラリー）
-       ※縦長画像が絶対に切れないエディトリアル仕様
     ------------------------------------------ */
     .lookbook-section {
-      padding: 0 24px 90px;
-      max-width: 1300px;
+      padding: 0 32px 120px;
+      max-width: 1400px;
       margin: 0 auto;
     }
     .masonry-gallery {
-      column-count: 3;        /* PC表示：3列 */
-      column-gap: 32px;
+      column-count: 3;
+      column-gap: 40px;
     }
     @media (max-width: 1024px) {
-      .masonry-gallery {
-        column-count: 2;
-        column-gap: 24px;
-      }
+      .masonry-gallery { column-count: 2; column-gap: 32px; }
+      .lookbook-section { padding: 0 24px 90px; }
     }
     @media (max-width: 640px) {
-      .lookbook-section {
-        padding: 0 16px 60px;
-      }
-      .masonry-gallery {
-        column-count: 2;      /* スマホ表示：2列で美しく敷き詰める */
-        column-gap: 16px;
-      }
+      .masonry-gallery { column-count: 2; column-gap: 16px; }
+      .lookbook-section { padding: 0 16px 60px; }
     }
     .look-card {
       break-inside: avoid;
-      margin-bottom: 36px;
+      margin-bottom: 40px;
       display: block;
+      cursor: crosshair; /* エディトリアル感を出すカスタムカーソル */
     }
-    @media (max-width: 640px) {
-      .look-card {
-        margin-bottom: 20px;
-      }
-    }
+    @media (max-width: 640px) { .look-card { margin-bottom: 24px; } }
+    
     .look-image-wrap {
       width: 100%;
-      background-color: #f0eee9;
       overflow: hidden;
+      background-color: #eee;
     }
     .look-image-wrap img {
       width: 100%;
-      height: auto;           /* 縦長カットも頭から足先まで完全表示 */
-      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+      height: auto;
+      /* プレミアムなホバーアニメーション設定 */
+      transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1), filter 1s ease;
+      transform: scale(1.01);
     }
     .look-card:hover .look-image-wrap img {
-      transform: scale(1.02);
-      opacity: 0.95;
+      transform: scale(1.05);
+      filter: brightness(0.9); /* 少し暗くしてリッチ感を出す */
     }
     .look-meta {
-      padding-top: 10px;
+      padding-top: 16px;
+      text-align: center;
     }
     .look-number {
       display: block;
       font-family: 'Cormorant Garamond', sans-serif;
       font-size: 13px;
-      letter-spacing: 0.15em;
-      color: #888;
-      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: #666;
     }
 
     /* ------------------------------------------
        店舗情報 & リンク
     ------------------------------------------ */
     .info-section {
-      background-color: #f3f1ea;
-      padding: 80px 24px;
+      background-color: #f0eee9;
+      padding: 100px 24px;
       border-top: 1px solid #e7e4dc;
     }
-    .info-container {
-      max-width: 960px;
-      margin: 0 auto;
-    }
+    .info-container { max-width: 960px; margin: 0 auto; }
     .section-title {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 500;
       text-align: center;
-      letter-spacing: 0.15em;
-      margin-bottom: 40px;
+      letter-spacing: 0.2em;
+      margin-bottom: 50px;
     }
     .shop-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      margin-bottom: 60px;
+      gap: 40px;
+      margin-bottom: 80px;
     }
-    @media (max-width: 768px) {
-      .shop-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-    }
+    @media (max-width: 768px) { .shop-grid { grid-template-columns: 1fr; gap: 24px; margin-bottom: 50px;} }
+    
     .shop-card {
       background: #faf9f5;
-      padding: 30px;
-      border: 1px solid #e2ded5;
+      padding: 40px;
+      transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
     }
+    .shop-card:hover { transform: translateY(-5px); }
     .shop-name {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 600;
-      letter-spacing: 0.08em;
-      border-bottom: 1px solid #2b2b2b;
-      padding-bottom: 8px;
-      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid #d4d1c9;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
     }
     .shop-details dt {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
-      color: #777;
-      margin-top: 14px;
-      letter-spacing: 0.05em;
+      color: #888;
+      margin-top: 16px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
     .shop-details dd {
       font-size: 14px;
       margin: 0;
-      color: #2b2b2b;
-      line-height: 1.7;
+      color: #333;
+      line-height: 1.8;
     }
     .shop-details .note {
-      display: inline-block;
+      display: block;
       font-size: 12px;
-      color: #777;
-      margin-top: 4px;
-      line-height: 1.5;
-    }
-
-    /* リンク・ボタンエリア */
-    .links-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      text-align: center;
-    }
-    @media (max-width: 640px) {
-      .links-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    .link-box {
-      background: #faf9f5;
-      padding: 30px 24px;
-      border: 1px solid #e2ded5;
-    }
-    .link-box h4 {
-      font-size: 15px;
-      letter-spacing: 0.12em;
-      margin-bottom: 10px;
-    }
-    .link-box p {
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 20px;
+      color: #888;
+      margin-top: 6px;
       line-height: 1.6;
     }
-    .btn-action {
-      display: inline-block;
-      padding: 12px 30px;
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      background-color: #2b2b2b;
-      color: #fff;
-      transition: background-color 0.2s ease, opacity 0.2s ease;
-    }
-    .btn-action:hover {
-      background-color: #555;
-    }
-    .btn-action.outline {
-      background-color: transparent;
-      color: #2b2b2b;
-      border: 1px solid #2b2b2b;
-    }
-    .btn-action.outline:hover {
-      background-color: #2b2b2b;
-      color: #fff;
-    }
 
-    /* ------------------------------------------
-       フッター
-    ------------------------------------------ */
-    .site-footer {
-      padding: 40px 20px;
-      text-align: center;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      color: #888;
-      background-color: #faf9f5;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- ヘッダー -->
-  <header class="site-header">
-    <div class="brand-logo">SAKU KYOTO</div>
-  </header>
-
-  <main>
-    <!-- ブランドコンセプト -->
-    <section class="concept-section">
-      <h1 class="concept-title">サク KYOTO</h1>
-      <p class="concept-lead">さく研究所の新しいものづくり「サク KYOTO」始まります。</p>
-      
-      <p class="concept-ja">
-        心地よく上質な素材を使った日本のものづくり。<br>
-        自由だけどルーズじゃない。<br>
-        日常だけど特別な衣。<br>
-        京都の街よりお届けです。
-      </p>
-
-      <p class="concept-en">
-        The new creative journey of Saku Laboratory begins.<br>
-        Rooted in Japanese craftsmanship,<br>
-        we create pieces using comfortable, refined, high-quality materials.<br>
-        Free, yet never careless.<br>
-        Everyday, yet always special.<br>
-        Bringing you something special from the streets of Kyoto.
-      </p>
-    </section>
-
-    <!-- ルックブックギャラリー（saku_1.jpg 〜 saku_15.jpg） -->
-    <section class="lookbook-section">
-      <div class="masonry-gallery">
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_1.jpg" alt="LOOK 01" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 01</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_2.jpg" alt="LOOK 02" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 02</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_3.jpg" alt="LOOK 03" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 03</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_4.jpg" alt="LOOK 04" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 04</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_5.jpg" alt="LOOK 05" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 05</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_6.jpg" alt="LOOK 06" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 06</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_7.jpg" alt="LOOK 07" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 07</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_8.jpg" alt="LOOK 08" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 08</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_9.jpg" alt="LOOK 09" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 09</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_10.jpg" alt="LOOK 10" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 10</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_11.jpg" alt="LOOK 11" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 11</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_12.jpg" alt="LOOK 12" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 12</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_13.jpg" alt="LOOK 13" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 13</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_14.jpg" alt="LOOK 14" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 14</span>
-          </div>
-        </article>
-
-        <article class="look-card">
-          <div class="look-image-wrap">
-            <img src="saku_15.jpg" alt="LOOK 15" loading="lazy">
-          </div>
-          <div class="look-meta">
-            <span class="look-number">LOOK 15</span>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- 店舗情報 & お問い合わせ -->
-    <section class="info-section">
-      <div class="info-container">
-        
-        <h2 class="section-title">店舗情報</h2>
-        
-        <div class="shop-grid">
-          <!-- 居内商店 -->
-          <div class="shop-card">
-            <h3 class="shop-name">＜居内商店＞</h3>
-            <dl class="shop-details">
-              <dt>住所</dt>
-              <dd>京都市東山区星野町 88-1</dd>
-              <dt>アクセス</dt>
-              <dd>
-                八坂の塔（法観寺）のすぐ目の前です。<br>
-                <span class="note">※現在マップアプリ上で以前の店舗名が表示される場合があるため、目の前にある八坂の塔を目印にお越しください。</span>
-              </dd>
-              <dt>営業時間</dt>
-              <dd>11:00 〜 19:00</dd>
-              <dt>定休日</dt>
-              <dd>原則年内無休（臨時休業日などはゴフクヤサンドットコム SNSでお知らせ有）</dd>
-            </dl>
-          </div>
-
-          <!-- ゴフクヤサンドットコム -->
-          <div class="shop-card">
-            <h3 class="shop-name">＜ゴフクヤサンドットコム＞</h3>
-            <dl class="shop-details">
-              <dt>住所</dt>
-              <dd>大阪府大阪市中央区船場中 3 丁目 船場センタービル 7号館 B1 北側</dd>
-              <dt>営業時間</dt>
-              <dd>11:00 〜 17:00</dd>
-              <dt>定休日</dt>
-              <dd>原則年内無休（臨時休業日などはゴフクヤサンドットコム SNSでお知らせ有）</dd>
-            </dl>
-          </div>
-        </div>
-
-        <!-- リンクエリア -->
-        <div class="links-grid">
-          <div class="link-box">
-            <h4>ONLINE STORE</h4>
-            <p>さく研究所の通常商品はこちらからお買い物していただけます。</p>
-            <a href="https://store.gofukuyasan.com/" target="_blank" rel="noopener noreferrer" class="btn-action">
-              ONLINE STORE &rarr;
-            </a>
-          </div>
-
-          <div class="link-box">
-            <h4>CONTACT</h4>
-            <p>商品や店舗に関するご質問・ご相談はこちらから承ります。</p>
-            <a href="https://store.gofukuyasan.com/html/email.html" target="_blank" rel="noopener noreferrer" class="btn-action outline">
-              お問い合せフォーム &rarr;
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>&copy; SAKU KYOTO / GOFUKUYASAN. All Rights Reserved.</p>
-  </footer>
-
-</body>
-</html>
+    .links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; text-align: center; }
+    @media (max-width: 640px) { .links-grid { grid-template-columns: 1fr
