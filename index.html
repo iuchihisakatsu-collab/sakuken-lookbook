@@ -6,9 +6,9 @@
   <title>サク KYOTO | LOOKBOOK</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
   
-  <!-- 画像拡大エフェクト（Fancybox）の最先端スタイルシート -->
+  <!-- 画像拡大エフェクト（Fancybox） -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
   <style>
@@ -24,10 +24,9 @@
     .lenis.lenis-smooth { scroll-behavior: auto; }
     .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
     .lenis.lenis-stopped { overflow: hidden; }
-    .lenis.lenis-scrolling iframe { pointer-events: none; }
 
     body {
-      background-color: #faf9f5;
+      background-color: #f7f6f2; /* 雑誌の紙のようなオフホワイト */
       color: #2b2b2b;
       font-family: 'Shippori Mincho', "Yu Mincho", "Hiragino Mincho ProN", serif;
       line-height: 1.8;
@@ -39,12 +38,12 @@
     img { max-width: 100%; height: auto; display: block; }
 
     /* ------------------------------------------
-       ローディング画面（シネマティック演出）
+       ローディング画面
     ------------------------------------------ */
     #preloader {
       position: fixed;
       inset: 0;
-      background: #faf9f5;
+      background: #f7f6f2;
       z-index: 9999;
       display: flex;
       align-items: center;
@@ -67,7 +66,7 @@
     .loaded #preloader { opacity: 0; visibility: hidden; }
 
     /* ------------------------------------------
-       ヘッダー（すりガラス・追従）
+       ヘッダー
     ------------------------------------------ */
     .site-header {
       position: fixed;
@@ -75,170 +74,201 @@
       width: 100%;
       padding: 30px 20px;
       text-align: center;
-      background: rgba(250, 249, 245, 0.7);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(247, 246, 242, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       z-index: 100;
-      transition: padding 0.5s ease, border-bottom 0.5s ease;
-      border-bottom: 1px solid transparent;
+      transition: padding 0.6s ease, background 0.6s ease;
     }
     .scrolled .site-header {
       padding: 15px 20px;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+      background: rgba(247, 246, 242, 0.95);
+      border-bottom: 1px solid rgba(0,0,0,0.03);
     }
     .brand-logo {
       font-family: 'Cormorant Garamond', 'Shippori Mincho', serif;
-      font-size: 24px;
-      letter-spacing: 0.25em;
-      font-weight: 500;
-      text-transform: uppercase;
+      font-size: 22px;
+      letter-spacing: 0.3em;
+      font-weight: 400;
     }
 
     /* ------------------------------------------
-       スクロール表示アニメーション
+       スクロールアニメーション（より優雅に）
     ------------------------------------------ */
     .fade-up {
       opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1), transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+      transform: translateY(60px);
+      transition: opacity 1.5s cubic-bezier(0.19, 1, 0.22, 1), transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
     }
-    .fade-up.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-up.is-visible { opacity: 1; transform: translateY(0); }
 
     /* ------------------------------------------
-       コンセプトセクション
+       コンセプトセクション（雑誌の巻頭言風）
     ------------------------------------------ */
     .concept-section {
-      padding: 180px 24px 100px;
+      padding: 200px 24px 120px;
       text-align: center;
-      max-width: 780px;
+      max-width: 800px;
       margin: 0 auto;
+      position: relative;
+    }
+    .concept-section::before {
+      content: "EDITORIAL";
+      position: absolute;
+      top: 140px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 100px;
+      color: rgba(0,0,0,0.03);
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      z-index: -1;
     }
     .concept-title {
-      font-size: 32px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
       margin-bottom: 24px;
     }
     .concept-lead {
-      font-size: 14px;
+      font-size: 13px;
       color: #777;
-      margin-bottom: 48px;
-      letter-spacing: 0.1em;
+      margin-bottom: 60px;
+      letter-spacing: 0.15em;
     }
     .concept-ja {
-      font-size: 16px;
-      line-height: 2.4;
-      margin-bottom: 40px;
-      letter-spacing: 0.1em;
-      color: #111;
+      font-size: 15px;
+      line-height: 2.6;
+      margin-bottom: 50px;
+      letter-spacing: 0.15em;
+      color: #222;
     }
     .concept-en {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 17px;
-      color: #666;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      color: #888;
       font-style: italic;
-      line-height: 2;
-      letter-spacing: 0.05em;
+      line-height: 2.2;
+      letter-spacing: 0.08em;
     }
 
     /* ------------------------------------------
-       ルックブック 全体コンテナ
+       エディトリアル・レイアウト（ここから雑誌風）
     ------------------------------------------ */
-    .lookbook-section {
-      padding: 0 32px 120px;
-      max-width: 1400px;
+    .editorial-container {
+      max-width: 1200px;
       margin: 0 auto;
+      padding: 0 24px 150px;
     }
-    @media (max-width: 1024px) {
-      .lookbook-section { padding: 0 24px 90px; }
-    }
-    @media (max-width: 640px) {
-      .lookbook-section { padding: 0 16px 60px; }
-    }
-
-    /* --- 巻頭の1枚（ヒーロールック） --- */
-    .hero-look {
-      margin-bottom: 80px;
-      display: block;
-    }
-    .hero-image-wrap {
-      display: block; /* aタグになるため必須 */
-      width: 100%;
-      overflow: hidden;
-      background-color: #eee;
-      cursor: zoom-in;
-    }
-    .hero-image-wrap img {
-      width: 100%;
-      height: auto;
-      transition: transform 2s cubic-bezier(0.19, 1, 0.22, 1), filter 1.5s ease;
-      transform: scale(1.01);
-    }
-    .hero-look:hover .hero-image-wrap img {
-      transform: scale(1.04);
-      filter: brightness(0.95);
-    }
-    .hero-meta {
-      padding-top: 24px;
-      text-align: center;
-    }
-    .hero-meta .look-number {
-      font-size: 15px; 
-      letter-spacing: 0.3em;
-    }
-    @media (max-width: 640px) { 
-      .hero-look { margin-bottom: 48px; } 
-      .hero-meta { padding-top: 16px; }
-    }
-
-    /* --- 2枚目以降（メイソンリーギャラリー） --- */
-    .masonry-gallery {
-      column-count: 3;
-      column-gap: 40px;
-    }
-    @media (max-width: 1024px) {
-      .masonry-gallery { column-count: 2; column-gap: 32px; }
-    }
-    @media (max-width: 640px) {
-      .masonry-gallery { column-count: 2; column-gap: 16px; }
-    }
-    .look-card {
-      break-inside: avoid;
-      margin-bottom: 40px;
-      display: block;
-    }
-    @media (max-width: 640px) { .look-card { margin-bottom: 24px; } }
     
-    .look-image-wrap {
-      display: block; /* aタグになるため必須 */
-      width: 100%;
+    /* 画像ホバーエフェクト */
+    .ed-img-wrap {
+      display: block;
       overflow: hidden;
-      background-color: #eee;
+      background: #eee;
       cursor: zoom-in;
+      position: relative;
     }
-    .look-image-wrap img {
+    .ed-img-wrap img {
       width: 100%;
       height: auto;
-      transition: transform 1.5s cubic-bezier(0.19, 1, 0.22, 1), filter 1s ease;
+      transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1), filter 1s ease;
       transform: scale(1.01);
     }
-    .look-card:hover .look-image-wrap img {
-      transform: scale(1.05);
-      filter: brightness(0.9);
+    .ed-img-wrap:hover img {
+      transform: scale(1.04);
+      filter: brightness(0.92);
     }
-    .look-meta {
-      padding-top: 16px;
-      text-align: center;
-    }
-    .look-number {
-      display: block;
-      font-family: 'Cormorant Garamond', sans-serif;
-      font-size: 13px;
+
+    /* キャプション */
+    .ed-caption {
+      margin-top: 16px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
       letter-spacing: 0.2em;
+      color: #555;
+    }
+    /* 巨大な装飾数字 */
+    .ed-big-num {
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 160px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.04);
+      line-height: 1;
+      z-index: -1;
+    }
+
+    /* ------------------------------------------
+       スプレッド（見開き）の種類
+    ------------------------------------------ */
+    /* 1. 巻頭見開きドーン（1枚目） */
+    .spread-hero {
+      margin-bottom: 120px;
+      position: relative;
+    }
+    .spread-hero .ed-caption { text-align: center; margin-top: 24px; font-size: 16px; letter-spacing: 0.3em; }
+    
+    /* 2. アシンメトリー左右（2枚目、3枚目） */
+    .spread-stagger {
+      display: grid;
+      grid-template-columns: 6fr 4fr;
+      gap: 8%;
+      align-items: center;
+      margin-bottom: 150px;
+      position: relative;
+    }
+    .spread-stagger.reverse { grid-template-columns: 4fr 6fr; }
+    .spread-stagger .ed-item:nth-child(2) { margin-top: 20%; }
+    
+    /* 3. センター配置の余白たっぷり（4枚目など） */
+    .spread-center {
+      max-width: 60%;
+      margin: 0 auto 150px;
+      text-align: center;
+      position: relative;
+    }
+    
+    /* 4. 縦書きテキストとの組み合わせ（5枚目） */
+    .spread-vertical-text {
+      display: grid;
+      grid-template-columns: 1fr 5fr;
+      gap: 5%;
+      margin-bottom: 150px;
+      align-items: end;
+    }
+    .vertical-ja {
+      writing-mode: vertical-rl;
+      font-size: 14px;
+      letter-spacing: 0.3em;
+      line-height: 2;
       color: #666;
+      height: 300px;
+    }
+
+    /* 5. 三枚コラージュ風（7,8,9枚目） */
+    .spread-triplet {
+      display: grid;
+      grid-template-columns: 3fr 4fr 3fr;
+      gap: 4%;
+      margin-bottom: 150px;
+      align-items: center;
+    }
+    .spread-triplet .ed-item:nth-child(1) { margin-top: -10%; }
+    .spread-triplet .ed-item:nth-child(3) { margin-top: 15%; }
+
+    /* レスポンシブ（スマホ時は縦並びにして余白で雑誌感を出す） */
+    @media (max-width: 768px) {
+      .spread-stagger, .spread-stagger.reverse, .spread-vertical-text, .spread-triplet {
+        display: block;
+        margin-bottom: 80px;
+      }
+      .spread-stagger .ed-item, .spread-triplet .ed-item { margin-bottom: 40px; margin-top: 0 !important; }
+      .spread-stagger .ed-item:nth-child(2) { margin-left: 20%; } /* スマホでも少しズラす */
+      .spread-center { max-width: 100%; margin-bottom: 80px; }
+      .vertical-ja { display: none; } /* スマホでは縦書き非表示ですっきり */
+      .ed-big-num { font-size: 100px; }
     }
 
     /* ------------------------------------------
@@ -246,297 +276,186 @@
     ------------------------------------------ */
     .info-section {
       background-color: #f0eee9;
-      padding: 100px 24px;
-      border-top: 1px solid #e7e4dc;
+      padding: 120px 24px;
     }
     .info-container { max-width: 960px; margin: 0 auto; }
     .section-title {
-      font-size: 22px;
-      font-weight: 500;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
       text-align: center;
-      letter-spacing: 0.2em;
-      margin-bottom: 50px;
+      letter-spacing: 0.3em;
+      margin-bottom: 60px;
     }
-    .shop-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 80px;
-    }
-    @media (max-width: 768px) { .shop-grid { grid-template-columns: 1fr; gap: 24px; margin-bottom: 50px;} }
+    .shop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
+    @media (max-width: 768px) { .shop-grid { grid-template-columns: 1fr; gap: 32px; } }
     
     .shop-card {
-      background: #faf9f5;
+      background: #f7f6f2;
       padding: 40px;
-      transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+      border: 1px solid rgba(0,0,0,0.05);
     }
-    .shop-card:hover { transform: translateY(-5px); }
     .shop-name {
-      font-size: 16px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      border-bottom: 1px solid #d4d1c9;
-      padding-bottom: 12px;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 16px;
       margin-bottom: 24px;
     }
-    .shop-details dt {
-      font-size: 11px;
-      font-weight: 600;
-      color: #888;
-      margin-top: 16px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .shop-details dd {
-      font-size: 14px;
-      margin: 0;
-      color: #333;
-      line-height: 1.8;
-    }
-    .shop-details .note {
-      display: block;
-      font-size: 12px;
-      color: #888;
-      margin-top: 6px;
-      line-height: 1.6;
-    }
+    .shop-details dt { font-size: 11px; color: #888; margin-top: 20px; letter-spacing: 0.1em; text-transform: uppercase; }
+    .shop-details dd { font-size: 13px; margin: 0; color: #444; line-height: 2; }
+    .shop-details .note { display: block; font-size: 11px; color: #999; margin-top: 8px; line-height: 1.6; }
 
     .links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; text-align: center; }
     @media (max-width: 640px) { .links-grid { grid-template-columns: 1fr; } }
-    
-    .link-box {
-      background: transparent;
-      padding: 40px 24px;
-      border: 1px solid #d4d1c9;
-      transition: background 0.4s ease;
-    }
-    .link-box:hover { background: #faf9f5; }
-    .link-box h4 {
-      font-size: 16px;
-      letter-spacing: 0.15em;
-      margin-bottom: 12px;
-      font-family: 'Cormorant Garamond', serif;
-    }
-    .link-box p {
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 24px;
-      line-height: 1.8;
-    }
-    .btn-action {
-      display: inline-block;
-      padding: 14px 36px;
-      font-size: 12px;
-      letter-spacing: 0.15em;
-      background-color: #2b2b2b;
-      color: #fff;
-      transition: background-color 0.4s ease, color 0.4s ease;
-    }
-    .btn-action:hover { background-color: #777; }
-    .btn-action.outline { background-color: transparent; color: #2b2b2b; border: 1px solid #2b2b2b; }
-    .btn-action.outline:hover { background-color: #2b2b2b; color: #fff; }
+    .link-box { padding: 40px 24px; border: 1px solid #d4d1c9; transition: background 0.4s ease; }
+    .link-box:hover { background: #fff; }
+    .link-box h4 { font-family: 'Cormorant Garamond', serif; font-size: 18px; letter-spacing: 0.2em; margin-bottom: 16px; }
+    .link-box p { font-size: 12px; color: #777; margin-bottom: 30px; line-height: 2; letter-spacing: 0.1em; }
+    .btn-action { display: inline-block; padding: 16px 40px; font-size: 12px; letter-spacing: 0.2em; background: #222; color: #fff; transition: opacity 0.4s ease; }
+    .btn-action:hover { opacity: 0.7; }
+    .btn-action.outline { background: transparent; color: #222; border: 1px solid #222; }
 
-    /* ------------------------------------------
-       フッター
-    ------------------------------------------ */
-    .site-footer {
-      padding: 60px 20px;
-      text-align: center;
-      font-size: 10px;
-      letter-spacing: 0.25em;
-      color: #999;
-      background-color: #faf9f5;
-      font-family: 'Cormorant Garamond', sans-serif;
-      text-transform: uppercase;
-    }
+    .site-footer { padding: 60px 20px; text-align: center; font-size: 10px; letter-spacing: 0.3em; color: #aaa; font-family: 'Cormorant Garamond', serif; text-transform: uppercase; }
   </style>
 </head>
 <body>
 
-  <!-- ローディング画面 -->
+  <!-- ローディング -->
   <div id="preloader">
     <div class="loader-logo">Saku Kyoto</div>
   </div>
 
-  <!-- ヘッダー -->
   <header class="site-header" id="header">
     <div class="brand-logo">SAKU KYOTO</div>
   </header>
 
   <main>
-    <!-- ブランドコンセプト -->
     <section class="concept-section fade-up">
       <h1 class="concept-title">サク KYOTO</h1>
       <p class="concept-lead">さく研究所の新しいものづくり「サク KYOTO」始まります。</p>
-      
-      <p class="concept-ja">
-        心地よく上質な素材を使った日本のものづくり。<br>
-        自由だけどルーズじゃない。<br>
-        日常だけど特別な衣。<br>
-        京都の街よりお届けです。
-      </p>
-
-      <p class="concept-en">
-        The new creative journey of Saku Laboratory begins.<br>
-        Rooted in Japanese craftsmanship,<br>
-        we create pieces using comfortable, refined, high-quality materials.<br>
-        Free, yet never careless.<br>
-        Everyday, yet always special.<br>
-        Bringing you something special from the streets of Kyoto.
-      </p>
+      <p class="concept-ja">心地よく上質な素材を使った日本のものづくり。<br>自由だけどルーズじゃない。<br>日常だけど特別な衣。<br>京都の街よりお届けです。</p>
+      <p class="concept-en">The new creative journey of Saku Laboratory begins.<br>Rooted in Japanese craftsmanship,<br>we create pieces using comfortable, refined, high-quality materials.<br>Bringing you something special from the streets of Kyoto.</p>
     </section>
 
-    <!-- ルックブックギャラリー -->
-    <section class="lookbook-section">
+    <!-- 雑誌風エディトリアルレイアウト -->
+    <section class="editorial-container">
       
-      <!-- どかーんと見せる1枚目（ヒーロールック） -->
-      <article class="hero-look fade-up">
-        <!-- クリックで拡大させるため a タグに変更 -->
-        <a href="saku_1.jpg" data-fancybox="gallery" data-caption="LOOK 01" class="hero-image-wrap">
+      <!-- Spread 1: 巻頭大見開き（1枚目） -->
+      <div class="spread-hero fade-up">
+        <a href="saku_1.jpg" data-fancybox="gallery" class="ed-img-wrap">
           <img src="saku_1.jpg" alt="LOOK 01" loading="eager">
         </a>
-        <div class="hero-meta">
-          <span class="look-number">LOOK 01</span>
-        </div>
-      </article>
-
-      <!-- 2枚目以降はメイソンリーグリッド -->
-      <div class="masonry-gallery">
-
-        <article class="look-card fade-up">
-          <a href="saku_2.jpg" data-fancybox="gallery" data-caption="LOOK 02" class="look-image-wrap">
-            <img src="saku_2.jpg" alt="LOOK 02" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 02</span></div>
-        </article>
-
-        <article class="look-card fade-up">
-          <a href="saku_3.jpg" data-fancybox="gallery" data-caption="LOOK 03" class="look-image-wrap">
-            <img src="saku_3.jpg" alt="LOOK 03" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 03</span></div>
-        </article>
-
-        <article class="look-card fade-up">
-          <a href="saku_4.jpg" data-fancybox="gallery" data-caption="LOOK 04" class="look-image-wrap">
-            <img src="saku_4.jpg" alt="LOOK 04" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 04</span></div>
-        </article>
-
-        <article class="look-card fade-up">
-          <a href="saku_5.jpg" data-fancybox="gallery" data-caption="LOOK 05" class="look-image-wrap">
-            <img src="saku_5.jpg" alt="LOOK 05" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 05</span></div>
-        </article>
-
-        <article class="look-card fade-up">
-          <a href="saku_6.jpg" data-fancybox="gallery" data-caption="LOOK 06" class="look-image-wrap">
-            <img src="saku_6.jpg" alt="LOOK 06" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 06</span></div>
-        </article>
-
-        <article class="look-card fade-up">
-          <a href="saku_7.jpg" data-fancybox="gallery" data-caption="LOOK 07" class="look-image-wrap">
-            <img src="saku_7.jpg" alt="LOOK 07" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 07</span></div>
-        </article>
-
-        <article class="look-card fade-up">
-          <a href="saku_8.jpg" data-fancybox="gallery" data-caption="LOOK 08" class="look-image-wrap">
-            <img src="saku_8.jpg" alt="LOOK 08" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 08</span></div>
-        </article>
-
-        <article class="look-card fade-up">
-          <a href="saku_9.jpg" data-fancybox="gallery" data-caption="LOOK 09" class="look-image-wrap">
-            <img src="saku_9.jpg" alt="LOOK 09" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 09</span></div>
-        </article>
-
-        <article class="look-card fade-up">
-          <a href="saku_10.jpg" data-fancybox="gallery" data-caption="LOOK 10" class="look-image-wrap">
-            <img src="saku_10.jpg" alt="LOOK 10" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 10</span></div>
-        </article>
-
-        <article class="look-card fade-up">
-          <a href="saku_11.jpg" data-fancybox="gallery" data-caption="LOOK 11" class="look-image-wrap">
-            <img src="saku_11.jpg" alt="LOOK 11" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 11</span></div>
-        </article>
-
-        <article class="look-card fade-up">
-          <a href="saku_12.jpg" data-fancybox="gallery" data-caption="LOOK 12" class="look-image-wrap">
-            <img src="saku_12.jpg" alt="LOOK 12" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 12</span></div>
-        </article>
-
-        <article class="look-card fade-up">
-          <a href="saku_13.jpg" data-fancybox="gallery" data-caption="LOOK 13" class="look-image-wrap">
-            <img src="saku_13.jpg" alt="LOOK 13" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 13</span></div>
-        </article>
-
-        <article class="look-card fade-up">
-          <a href="saku_14.jpg" data-fancybox="gallery" data-caption="LOOK 14" class="look-image-wrap">
-            <img src="saku_14.jpg" alt="LOOK 14" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 14</span></div>
-        </article>
-
-        <article class="look-card fade-up">
-          <a href="saku_15.jpg" data-fancybox="gallery" data-caption="LOOK 15" class="look-image-wrap">
-            <img src="saku_15.jpg" alt="LOOK 15" loading="lazy">
-          </a>
-          <div class="look-meta"><span class="look-number">LOOK 15</span></div>
-        </article>
-
+        <div class="ed-caption">LOOK 01</div>
       </div>
+
+      <!-- Spread 2: 左右ズラし配置（2, 3枚目） -->
+      <div class="spread-stagger fade-up">
+        <div class="ed-big-num" style="top: -50px; left: -20px;">02</div>
+        <div class="ed-item">
+          <a href="saku_2.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_2.jpg" alt="LOOK 02" loading="lazy"></a>
+          <div class="ed-caption">LOOK 02</div>
+        </div>
+        <div class="ed-item">
+          <a href="saku_3.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_3.jpg" alt="LOOK 03" loading="lazy"></a>
+          <div class="ed-caption">LOOK 03</div>
+        </div>
+      </div>
+
+      <!-- Spread 3: 中央・余白たっぷり（4枚目） -->
+      <div class="spread-center fade-up">
+        <div class="ed-big-num" style="top: 20%; right: -15%;">04</div>
+        <a href="saku_4.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_4.jpg" alt="LOOK 04" loading="lazy"></a>
+        <div class="ed-caption">LOOK 04</div>
+      </div>
+
+      <!-- Spread 4: 縦書き文字とアシンメトリー（5, 6枚目） -->
+      <div class="spread-stagger reverse fade-up">
+        <div class="ed-item">
+          <a href="saku_5.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_5.jpg" alt="LOOK 05" loading="lazy"></a>
+          <div class="ed-caption">LOOK 05</div>
+        </div>
+        <div class="ed-item">
+          <a href="saku_6.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_6.jpg" alt="LOOK 06" loading="lazy"></a>
+          <div class="ed-caption">LOOK 06</div>
+        </div>
+      </div>
+
+      <!-- Spread 5: 3枚コラージュ（7, 8, 9枚目） -->
+      <div class="spread-triplet fade-up">
+        <div class="ed-big-num" style="bottom: 0; left: 10%;">07</div>
+        <div class="ed-item">
+          <a href="saku_7.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_7.jpg" alt="LOOK 07" loading="lazy"></a>
+        </div>
+        <div class="ed-item">
+          <a href="saku_8.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_8.jpg" alt="LOOK 08" loading="lazy"></a>
+          <div class="ed-caption" style="text-align: center;">LOOK 07 - 09</div>
+        </div>
+        <div class="ed-item">
+          <a href="saku_9.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_9.jpg" alt="LOOK 09" loading="lazy"></a>
+        </div>
+      </div>
+
+      <!-- Spread 6: 再びアシンメトリー（10, 11枚目） -->
+      <div class="spread-stagger fade-up">
+        <div class="ed-item">
+          <a href="saku_10.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_10.jpg" alt="LOOK 10" loading="lazy"></a>
+          <div class="ed-caption">LOOK 10</div>
+        </div>
+        <div class="ed-item">
+          <a href="saku_11.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_11.jpg" alt="LOOK 11" loading="lazy"></a>
+          <div class="ed-caption">LOOK 11</div>
+        </div>
+      </div>
+
+      <!-- Spread 7: 中央・余白たっぷり（12枚目） -->
+      <div class="spread-center fade-up">
+        <div class="ed-big-num" style="top: 10%; left: -20%;">12</div>
+        <a href="saku_12.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_12.jpg" alt="LOOK 12" loading="lazy"></a>
+        <div class="ed-caption">LOOK 12</div>
+      </div>
+
+      <!-- Spread 8: 左右ズラし（13, 14枚目） -->
+      <div class="spread-stagger reverse fade-up">
+        <div class="ed-item">
+          <a href="saku_13.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_13.jpg" alt="LOOK 13" loading="lazy"></a>
+          <div class="ed-caption">LOOK 13</div>
+        </div>
+        <div class="ed-item">
+          <a href="saku_14.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_14.jpg" alt="LOOK 14" loading="lazy"></a>
+          <div class="ed-caption">LOOK 14</div>
+        </div>
+      </div>
+
+      <!-- Spread 9: 最後の1枚（15枚目） -->
+      <div class="spread-center fade-up" style="margin-bottom: 0;">
+        <div class="ed-big-num" style="bottom: 0; right: -10%;">15</div>
+        <a href="saku_15.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_15.jpg" alt="LOOK 15" loading="lazy"></a>
+        <div class="ed-caption">LOOK 15</div>
+      </div>
+
     </section>
 
-    <!-- 店舗情報 & お問い合わせ -->
+    <!-- 店舗情報 & リンク -->
     <section class="info-section fade-up">
       <div class="info-container">
-        
         <h2 class="section-title">STORE INFO</h2>
-        
         <div class="shop-grid">
           <div class="shop-card">
             <h3 class="shop-name">居内商店（京都）</h3>
             <dl class="shop-details">
-              <dt>Address</dt>
-              <dd>京都市東山区星野町 88-1</dd>
-              <dt>Access</dt>
-              <dd>
-                八坂の塔（法観寺）のすぐ目の前です。<br>
-                <span class="note">※マップアプリ上では以前の店舗名が表示される場合があります。目の前にある八坂の塔を目印にお越しください。</span>
-              </dd>
-              <dt>Open</dt>
-              <dd>11:00 - 19:00</dd>
-              <dt>Closed</dt>
-              <dd>原則年内無休</dd>
+              <dt>Address</dt><dd>京都市東山区星野町 88-1</dd>
+              <dt>Access</dt><dd>八坂の塔（法観寺）のすぐ目の前です。<br><span class="note">※マップアプリ上では以前の店舗名が表示される場合があります。</span></dd>
+              <dt>Open</dt><dd>11:00 - 19:00</dd>
+              <dt>Closed</dt><dd>原則年内無休</dd>
             </dl>
           </div>
-
           <div class="shop-card">
             <h3 class="shop-name">ゴフクヤサンドットコム（大阪）</h3>
             <dl class="shop-details">
-              <dt>Address</dt>
-              <dd>大阪府大阪市中央区船場中 3-2-7 船場センタービル 7号館 B1 北側</dd>
-              <dt>Open</dt>
-              <dd>11:00 - 17:00</dd>
-              <dt>Closed</dt>
-              <dd>原則年内無休</dd>
+              <dt>Address</dt><dd>大阪府大阪市中央区船場中 3-2-7 船場センタービル 7号館 B1 北側</dd>
+              <dt>Open</dt><dd>11:00 - 17:00</dd>
+              <dt>Closed</dt><dd>原則年内無休</dd>
             </dl>
           </div>
         </div>
@@ -545,20 +464,14 @@
           <div class="link-box">
             <h4>ONLINE STORE</h4>
             <p>さく研究所の通常商品はこちらから</p>
-            <a href="https://store.gofukuyasan.com/" target="_blank" rel="noopener noreferrer" class="btn-action">
-              VISIT STORE
-            </a>
+            <a href="https://store.gofukuyasan.com/" target="_blank" rel="noopener noreferrer" class="btn-action">VISIT STORE</a>
           </div>
-
           <div class="link-box">
             <h4>CONTACT</h4>
             <p>商品や店舗に関するご質問・ご相談</p>
-            <a href="https://store.gofukuyasan.com/html/email.html" target="_blank" rel="noopener noreferrer" class="btn-action outline">
-              SEND MESSAGE
-            </a>
+            <a href="https://store.gofukuyasan.com/html/email.html" target="_blank" rel="noopener noreferrer" class="btn-action outline">SEND MESSAGE</a>
           </div>
         </div>
-
       </div>
     </section>
   </main>
@@ -569,8 +482,7 @@
 
   <!-- スムーススクロール (Lenis) -->
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
-  
-  <!-- 画像拡大エフェクト (Fancybox) の最先端スクリプト -->
+  <!-- ギャラリー機能 (Fancybox) -->
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
   <script>
@@ -581,7 +493,7 @@
       }, 500); 
     });
 
-    // 2. スムーススクロールの初期化
+    // 2. 慣性スクロール
     const lenis = new Lenis({
       duration: 1.5,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -593,24 +505,15 @@
     }
     requestAnimationFrame(raf);
 
-    // 3. ギャラリー拡大機能 (Fancybox) のプレミアム設定
+    // 3. Fancybox（タップ拡大）
     Fancybox.bind('[data-fancybox="gallery"]', {
       hideScrollbar: false,
-      Toolbar: {
-        display: {
-          left: [],
-          middle: ["infobar"],
-          right: ["close"],
-        },
-      },
-      Images: {
-        zoom: false, // UIをシンプルにするためにズームアイコンを非表示
-      },
-      // スワイプによる滑らかな切り替えと、下スワイプでの閉じる動作を有効化
+      Toolbar: { display: { left: [], middle: ["infobar"], right: ["close"] } },
+      Images: { zoom: false },
       dragToClose: true, 
     });
 
-    // 4. ヘッダーのスクロール検知
+    // 4. ヘッダー追従
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
@@ -620,12 +523,8 @@
       }
     });
 
-    // 5. スクロールに合わせたふわっと表示
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.15 
-    };
+    // 5. ふわっと表示
+    const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -634,7 +533,6 @@
         }
       });
     }, observerOptions);
-
     document.querySelectorAll('.fade-up').forEach(element => {
       observer.observe(element);
     });
