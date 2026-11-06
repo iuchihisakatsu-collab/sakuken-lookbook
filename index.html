@@ -8,18 +8,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
   
-  <!-- 画像拡大エフェクト（Fancybox） -->
+  <!-- 画像拡大（Fancybox）と横スワイプ（Swiper）の最新スタイルシート -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <style>
     /* ------------------------------------------
        ベースリセット・共通設定
     ------------------------------------------ */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html.lenis { height: auto; }
     .lenis.lenis-smooth { scroll-behavior: auto; }
     .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
@@ -41,267 +38,141 @@
        ローディング画面
     ------------------------------------------ */
     #preloader {
-      position: fixed;
-      inset: 0;
-      background: #f7f6f2;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: fixed; inset: 0; background: #f7f6f2; z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
       transition: opacity 1.2s cubic-bezier(0.7, 0, 0.3, 1), visibility 1.2s ease;
     }
     #preloader .loader-logo {
-      font-family: 'Cormorant Garamond', 'Shippori Mincho', serif;
-      font-size: 22px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      opacity: 0;
-      animation: pulseLogo 2s infinite ease-in-out;
+      font-family: 'Cormorant Garamond', serif; font-size: 22px; letter-spacing: 0.3em;
+      text-transform: uppercase; opacity: 0; animation: pulseLogo 2s infinite ease-in-out;
     }
-    @keyframes pulseLogo {
-      0% { opacity: 0.3; transform: scale(0.98); }
-      50% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0.3; transform: scale(0.98); }
-    }
+    @keyframes pulseLogo { 0% { opacity: 0.3; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } 100% { opacity: 0.3; transform: scale(0.98); } }
     .loaded #preloader { opacity: 0; visibility: hidden; }
 
     /* ------------------------------------------
        ヘッダー
     ------------------------------------------ */
     .site-header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 30px 20px;
-      text-align: center;
-      background: rgba(247, 246, 242, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      z-index: 100;
-      transition: padding 0.6s ease, background 0.6s ease;
+      position: fixed; top: 0; width: 100%; padding: 30px 20px; text-align: center;
+      background: rgba(247, 246, 242, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      z-index: 100; transition: padding 0.6s ease, background 0.6s ease;
     }
     .scrolled .site-header {
-      padding: 15px 20px;
-      background: rgba(247, 246, 242, 0.95);
-      border-bottom: 1px solid rgba(0,0,0,0.03);
+      padding: 15px 20px; background: rgba(247, 246, 242, 0.95); border-bottom: 1px solid rgba(0,0,0,0.03);
     }
-    .brand-logo {
-      font-family: 'Cormorant Garamond', 'Shippori Mincho', serif;
-      font-size: 22px;
-      letter-spacing: 0.3em;
-      font-weight: 400;
-    }
+    .brand-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; letter-spacing: 0.3em; }
 
     /* ------------------------------------------
-       スクロールアニメーション（より優雅に）
+       スクロールアニメーション
     ------------------------------------------ */
     .fade-up {
-      opacity: 0;
-      transform: translateY(60px);
+      opacity: 0; transform: translateY(60px);
       transition: opacity 1.5s cubic-bezier(0.19, 1, 0.22, 1), transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
     }
     .fade-up.is-visible { opacity: 1; transform: translateY(0); }
 
     /* ------------------------------------------
-       コンセプトセクション（雑誌の巻頭言風）
+       コンセプトセクション
     ------------------------------------------ */
     .concept-section {
-      padding: 200px 24px 120px;
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-      position: relative;
+      padding: 200px 24px 120px; text-align: center; max-width: 800px; margin: 0 auto; position: relative;
     }
     .concept-section::before {
-      content: "EDITORIAL";
-      position: absolute;
-      top: 140px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 100px;
-      color: rgba(0,0,0,0.03);
-      font-weight: 300;
-      letter-spacing: 0.2em;
-      z-index: -1;
+      content: "EDITORIAL"; position: absolute; top: 140px; left: 50%; transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', serif; font-size: 100px; color: rgba(0,0,0,0.03);
+      font-weight: 300; letter-spacing: 0.2em; z-index: -1;
     }
-    .concept-title {
-      font-size: 28px;
-      font-weight: 400;
-      letter-spacing: 0.25em;
-      margin-bottom: 24px;
-    }
-    .concept-lead {
-      font-size: 13px;
-      color: #777;
-      margin-bottom: 60px;
-      letter-spacing: 0.15em;
-    }
-    .concept-ja {
-      font-size: 15px;
-      line-height: 2.6;
-      margin-bottom: 50px;
-      letter-spacing: 0.15em;
-      color: #222;
-    }
-    .concept-en {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 16px;
-      color: #888;
-      font-style: italic;
-      line-height: 2.2;
-      letter-spacing: 0.08em;
-    }
+    .concept-title { font-size: 28px; font-weight: 400; letter-spacing: 0.25em; margin-bottom: 24px; }
+    .concept-lead { font-size: 13px; color: #777; margin-bottom: 60px; letter-spacing: 0.15em; }
+    .concept-ja { font-size: 15px; line-height: 2.6; margin-bottom: 50px; letter-spacing: 0.15em; color: #222; }
+    .concept-en { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: #888; font-style: italic; line-height: 2.2; letter-spacing: 0.08em; }
 
     /* ------------------------------------------
-       エディトリアル・レイアウト（ここから雑誌風）
+       前半：雑誌風レイアウト（1〜7枚目）
     ------------------------------------------ */
-    .editorial-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px 150px;
-    }
-    
-    /* 画像ホバーエフェクト */
-    .ed-img-wrap {
-      display: block;
-      overflow: hidden;
-      background: #eee;
-      cursor: zoom-in;
-      position: relative;
-    }
-    .ed-img-wrap img {
-      width: 100%;
-      height: auto;
-      transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1), filter 1s ease;
-      transform: scale(1.01);
-    }
-    .ed-img-wrap:hover img {
-      transform: scale(1.04);
-      filter: brightness(0.92);
-    }
+    .editorial-container { max-width: 1200px; margin: 0 auto; padding: 0 24px 50px; }
+    .ed-img-wrap { display: block; overflow: hidden; background: #eee; cursor: zoom-in; position: relative; }
+    .ed-img-wrap img { width: 100%; height: auto; transition: transform 1.8s cubic-bezier(0.19, 1, 0.22, 1), filter 1s ease; transform: scale(1.01); }
+    .ed-img-wrap:hover img { transform: scale(1.04); filter: brightness(0.92); }
+    .ed-caption { margin-top: 16px; font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 0.2em; color: #555; }
+    .ed-big-num { position: absolute; font-family: 'Cormorant Garamond', serif; font-size: 160px; font-weight: 300; color: rgba(0,0,0,0.04); line-height: 1; z-index: -1; }
 
-    /* キャプション */
-    .ed-caption {
-      margin-top: 16px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 14px;
-      letter-spacing: 0.2em;
-      color: #555;
-    }
-    /* 巨大な装飾数字 */
-    .ed-big-num {
-      position: absolute;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 160px;
-      font-weight: 300;
-      color: rgba(0,0,0,0.04);
-      line-height: 1;
-      z-index: -1;
-    }
-
-    /* ------------------------------------------
-       スプレッド（見開き）の種類
-    ------------------------------------------ */
-    /* 1. 巻頭見開きドーン（1枚目） */
-    .spread-hero {
-      margin-bottom: 120px;
-      position: relative;
-    }
+    .spread-hero { margin-bottom: 120px; position: relative; }
     .spread-hero .ed-caption { text-align: center; margin-top: 24px; font-size: 16px; letter-spacing: 0.3em; }
     
-    /* 2. アシンメトリー左右（2枚目、3枚目） */
-    .spread-stagger {
-      display: grid;
-      grid-template-columns: 6fr 4fr;
-      gap: 8%;
-      align-items: center;
-      margin-bottom: 150px;
-      position: relative;
-    }
+    .spread-stagger { display: grid; grid-template-columns: 6fr 4fr; gap: 8%; align-items: center; margin-bottom: 150px; position: relative; }
     .spread-stagger.reverse { grid-template-columns: 4fr 6fr; }
     .spread-stagger .ed-item:nth-child(2) { margin-top: 20%; }
     
-    /* 3. センター配置の余白たっぷり（4枚目など） */
-    .spread-center {
-      max-width: 60%;
-      margin: 0 auto 150px;
+    .spread-center { max-width: 60%; margin: 0 auto 150px; text-align: center; position: relative; }
+
+    @media (max-width: 768px) {
+      .spread-stagger, .spread-stagger.reverse { display: block; margin-bottom: 80px; }
+      .spread-stagger .ed-item { margin-bottom: 40px; margin-top: 0 !important; }
+      .spread-stagger .ed-item:nth-child(2) { margin-left: 20%; }
+      .spread-center { max-width: 100%; margin-bottom: 80px; }
+      .ed-big-num { font-size: 100px; }
+    }
+
+    /* ------------------------------------------
+       後半：横スワイプエリア（Swiper）
+    ------------------------------------------ */
+    .swipe-section {
+      background-color: #f0eee9; /* 背景色を変えて特別感を出す */
+      padding: 100px 0 120px;
+      margin-bottom: 0;
+    }
+    .swipe-header {
       text-align: center;
-      position: relative;
+      margin-bottom: 60px;
+    }
+    .swipe-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      letter-spacing: 0.3em;
+      color: #2b2b2b;
     }
     
-    /* 4. 縦書きテキストとの組み合わせ（5枚目） */
-    .spread-vertical-text {
-      display: grid;
-      grid-template-columns: 1fr 5fr;
-      gap: 5%;
-      margin-bottom: 150px;
-      align-items: end;
+    .swiper {
+      width: 100%;
+      padding-bottom: 40px; /* PCでのマウスドラッグ用の余裕 */
     }
-    .vertical-ja {
-      writing-mode: vertical-rl;
-      font-size: 14px;
-      letter-spacing: 0.3em;
-      line-height: 2;
-      color: #666;
-      height: 300px;
+    .swiper-slide {
+      /* スライドの幅（チラ見せ具合）を設定 */
+      width: 80%; 
+      transition: opacity 0.5s ease;
+      opacity: 0.4; /* 中央以外の写真は少し暗くしてエモくする */
+    }
+    /* 中央にきたアクティブな写真だけクッキリ見せる */
+    .swiper-slide-active {
+      opacity: 1;
+    }
+    @media (min-width: 768px) {
+      .swiper-slide { width: 45%; }
+    }
+    @media (min-width: 1024px) {
+      .swiper-slide { width: 30%; }
     }
 
-    /* 5. 三枚コラージュ風（7,8,9枚目） */
-    .spread-triplet {
-      display: grid;
-      grid-template-columns: 3fr 4fr 3fr;
-      gap: 4%;
-      margin-bottom: 150px;
-      align-items: center;
+    .swiper-slide .ed-img-wrap {
+      /* スワイプ中誤作動しないよう調整 */
+      user-select: none;
     }
-    .spread-triplet .ed-item:nth-child(1) { margin-top: -10%; }
-    .spread-triplet .ed-item:nth-child(3) { margin-top: 15%; }
-
-    /* レスポンシブ（スマホ時は縦並びにして余白で雑誌感を出す） */
-    @media (max-width: 768px) {
-      .spread-stagger, .spread-stagger.reverse, .spread-vertical-text, .spread-triplet {
-        display: block;
-        margin-bottom: 80px;
-      }
-      .spread-stagger .ed-item, .spread-triplet .ed-item { margin-bottom: 40px; margin-top: 0 !important; }
-      .spread-stagger .ed-item:nth-child(2) { margin-left: 20%; } /* スマホでも少しズラす */
-      .spread-center { max-width: 100%; margin-bottom: 80px; }
-      .vertical-ja { display: none; } /* スマホでは縦書き非表示ですっきり */
-      .ed-big-num { font-size: 100px; }
+    .swiper-slide .ed-caption {
+      text-align: center;
     }
 
     /* ------------------------------------------
        店舗情報 & リンク
     ------------------------------------------ */
-    .info-section {
-      background-color: #f0eee9;
-      padding: 120px 24px;
-    }
+    .info-section { background-color: #faf9f5; padding: 120px 24px; border-top: 1px solid #e7e4dc; }
     .info-container { max-width: 960px; margin: 0 auto; }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      text-align: center;
-      letter-spacing: 0.3em;
-      margin-bottom: 60px;
-    }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; text-align: center; letter-spacing: 0.3em; margin-bottom: 60px; }
     .shop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
     @media (max-width: 768px) { .shop-grid { grid-template-columns: 1fr; gap: 32px; } }
     
-    .shop-card {
-      background: #f7f6f2;
-      padding: 40px;
-      border: 1px solid rgba(0,0,0,0.05);
-    }
-    .shop-name {
-      font-size: 15px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 16px;
-      margin-bottom: 24px;
-    }
+    .shop-card { background: #fff; padding: 40px; border: 1px solid rgba(0,0,0,0.05); }
+    .shop-name { font-size: 15px; font-weight: 500; letter-spacing: 0.15em; border-bottom: 1px solid #ddd; padding-bottom: 16px; margin-bottom: 24px; }
     .shop-details dt { font-size: 11px; color: #888; margin-top: 20px; letter-spacing: 0.1em; text-transform: uppercase; }
     .shop-details dd { font-size: 13px; margin: 0; color: #444; line-height: 2; }
     .shop-details .note { display: block; font-size: 11px; color: #999; margin-top: 8px; line-height: 1.6; }
@@ -316,7 +187,7 @@
     .btn-action:hover { opacity: 0.7; }
     .btn-action.outline { background: transparent; color: #222; border: 1px solid #222; }
 
-    .site-footer { padding: 60px 20px; text-align: center; font-size: 10px; letter-spacing: 0.3em; color: #aaa; font-family: 'Cormorant Garamond', serif; text-transform: uppercase; }
+    .site-footer { padding: 60px 20px; text-align: center; font-size: 10px; letter-spacing: 0.3em; color: #aaa; font-family: 'Cormorant Garamond', serif; text-transform: uppercase; background: #faf9f5;}
   </style>
 </head>
 <body>
@@ -338,18 +209,14 @@
       <p class="concept-en">The new creative journey of Saku Laboratory begins.<br>Rooted in Japanese craftsmanship,<br>we create pieces using comfortable, refined, high-quality materials.<br>Bringing you something special from the streets of Kyoto.</p>
     </section>
 
-    <!-- 雑誌風エディトリアルレイアウト -->
+    <!-- 前半：雑誌風エディトリアルレイアウト（1〜7枚目） -->
     <section class="editorial-container">
       
-      <!-- Spread 1: 巻頭大見開き（1枚目） -->
       <div class="spread-hero fade-up">
-        <a href="saku_1.jpg" data-fancybox="gallery" class="ed-img-wrap">
-          <img src="saku_1.jpg" alt="LOOK 01" loading="eager">
-        </a>
+        <a href="saku_1.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_1.jpg" alt="LOOK 01" loading="eager"></a>
         <div class="ed-caption">LOOK 01</div>
       </div>
 
-      <!-- Spread 2: 左右ズラし配置（2, 3枚目） -->
       <div class="spread-stagger fade-up">
         <div class="ed-big-num" style="top: -50px; left: -20px;">02</div>
         <div class="ed-item">
@@ -362,14 +229,12 @@
         </div>
       </div>
 
-      <!-- Spread 3: 中央・余白たっぷり（4枚目） -->
       <div class="spread-center fade-up">
         <div class="ed-big-num" style="top: 20%; right: -15%;">04</div>
         <a href="saku_4.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_4.jpg" alt="LOOK 04" loading="lazy"></a>
         <div class="ed-caption">LOOK 04</div>
       </div>
 
-      <!-- Spread 4: 縦書き文字とアシンメトリー（5, 6枚目） -->
       <div class="spread-stagger reverse fade-up">
         <div class="ed-item">
           <a href="saku_5.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_5.jpg" alt="LOOK 05" loading="lazy"></a>
@@ -381,59 +246,77 @@
         </div>
       </div>
 
-      <!-- Spread 5: 3枚コラージュ（7, 8, 9枚目） -->
-      <div class="spread-triplet fade-up">
-        <div class="ed-big-num" style="bottom: 0; left: 10%;">07</div>
-        <div class="ed-item">
-          <a href="saku_7.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_7.jpg" alt="LOOK 07" loading="lazy"></a>
-        </div>
-        <div class="ed-item">
-          <a href="saku_8.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_8.jpg" alt="LOOK 08" loading="lazy"></a>
-          <div class="ed-caption" style="text-align: center;">LOOK 07 - 09</div>
-        </div>
-        <div class="ed-item">
-          <a href="saku_9.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_9.jpg" alt="LOOK 09" loading="lazy"></a>
-        </div>
-      </div>
-
-      <!-- Spread 6: 再びアシンメトリー（10, 11枚目） -->
-      <div class="spread-stagger fade-up">
-        <div class="ed-item">
-          <a href="saku_10.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_10.jpg" alt="LOOK 10" loading="lazy"></a>
-          <div class="ed-caption">LOOK 10</div>
-        </div>
-        <div class="ed-item">
-          <a href="saku_11.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_11.jpg" alt="LOOK 11" loading="lazy"></a>
-          <div class="ed-caption">LOOK 11</div>
-        </div>
-      </div>
-
-      <!-- Spread 7: 中央・余白たっぷり（12枚目） -->
-      <div class="spread-center fade-up">
-        <div class="ed-big-num" style="top: 10%; left: -20%;">12</div>
-        <a href="saku_12.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_12.jpg" alt="LOOK 12" loading="lazy"></a>
-        <div class="ed-caption">LOOK 12</div>
-      </div>
-
-      <!-- Spread 8: 左右ズラし（13, 14枚目） -->
-      <div class="spread-stagger reverse fade-up">
-        <div class="ed-item">
-          <a href="saku_13.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_13.jpg" alt="LOOK 13" loading="lazy"></a>
-          <div class="ed-caption">LOOK 13</div>
-        </div>
-        <div class="ed-item">
-          <a href="saku_14.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_14.jpg" alt="LOOK 14" loading="lazy"></a>
-          <div class="ed-caption">LOOK 14</div>
-        </div>
-      </div>
-
-      <!-- Spread 9: 最後の1枚（15枚目） -->
       <div class="spread-center fade-up" style="margin-bottom: 0;">
-        <div class="ed-big-num" style="bottom: 0; right: -10%;">15</div>
-        <a href="saku_15.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_15.jpg" alt="LOOK 15" loading="lazy"></a>
-        <div class="ed-caption">LOOK 15</div>
+        <div class="ed-big-num" style="bottom: 0; left: -20%;">07</div>
+        <a href="saku_7.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_7.jpg" alt="LOOK 07" loading="lazy"></a>
+        <div class="ed-caption">LOOK 07</div>
       </div>
 
+    </section>
+
+    <!-- 後半：横スワイプコレクションエリア（8〜15枚目以降） -->
+    <section class="swipe-section fade-up">
+      <div class="swipe-header">
+        <h2 class="swipe-title">COLLECTION</h2>
+        <p style="font-size: 11px; color: #888; letter-spacing: 0.1em; margin-top: 10px;">SWIPE TO DISCOVER</p>
+      </div>
+
+      <!-- Swiperコンテナ -->
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          
+          <!-- 8枚目 -->
+          <div class="swiper-slide">
+            <a href="saku_8.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_8.jpg" alt="LOOK 08" loading="lazy"></a>
+            <div class="ed-caption">LOOK 08</div>
+          </div>
+          
+          <!-- 9枚目 -->
+          <div class="swiper-slide">
+            <a href="saku_9.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_9.jpg" alt="LOOK 09" loading="lazy"></a>
+            <div class="ed-caption">LOOK 09</div>
+          </div>
+
+          <!-- 10枚目 -->
+          <div class="swiper-slide">
+            <a href="saku_10.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_10.jpg" alt="LOOK 10" loading="lazy"></a>
+            <div class="ed-caption">LOOK 10</div>
+          </div>
+
+          <!-- 11枚目 -->
+          <div class="swiper-slide">
+            <a href="saku_11.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_11.jpg" alt="LOOK 11" loading="lazy"></a>
+            <div class="ed-caption">LOOK 11</div>
+          </div>
+
+          <!-- 12枚目 -->
+          <div class="swiper-slide">
+            <a href="saku_12.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_12.jpg" alt="LOOK 12" loading="lazy"></a>
+            <div class="ed-caption">LOOK 12</div>
+          </div>
+
+          <!-- 13枚目 -->
+          <div class="swiper-slide">
+            <a href="saku_13.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_13.jpg" alt="LOOK 13" loading="lazy"></a>
+            <div class="ed-caption">LOOK 13</div>
+          </div>
+
+          <!-- 14枚目 -->
+          <div class="swiper-slide">
+            <a href="saku_14.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_14.jpg" alt="LOOK 14" loading="lazy"></a>
+            <div class="ed-caption">LOOK 14</div>
+          </div>
+
+          <!-- 15枚目 -->
+          <div class="swiper-slide">
+            <a href="saku_15.jpg" data-fancybox="gallery" class="ed-img-wrap"><img src="saku_15.jpg" alt="LOOK 15" loading="lazy"></a>
+            <div class="ed-caption">LOOK 15</div>
+          </div>
+
+          <!-- ★写真が増えたら、ここの下に上の <div class="swiper-slide">...</div> をコピペして追加してください -->
+
+        </div>
+      </div>
     </section>
 
     <!-- 店舗情報 & リンク -->
@@ -480,20 +363,18 @@
     <p>&copy; SAKU KYOTO / GOFUKUYASAN. All Rights Reserved.</p>
   </footer>
 
-  <!-- スムーススクロール (Lenis) -->
+  <!-- 各種最新スクリプト -->
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
-  <!-- ギャラリー機能 (Fancybox) -->
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <script>
     // 1. ローディング画面の解除
     window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.body.classList.add('loaded');
-      }, 500); 
+      setTimeout(() => { document.body.classList.add('loaded'); }, 500); 
     });
 
-    // 2. 慣性スクロール
+    // 2. 慣性スムーススクロール
     const lenis = new Lenis({
       duration: 1.5,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -505,7 +386,7 @@
     }
     requestAnimationFrame(raf);
 
-    // 3. Fancybox（タップ拡大）
+    // 3. Fancybox（タップで拡大・指で閉じる）
     Fancybox.bind('[data-fancybox="gallery"]', {
       hideScrollbar: false,
       Toolbar: { display: { left: [], middle: ["infobar"], right: ["close"] } },
@@ -513,17 +394,24 @@
       dragToClose: true, 
     });
 
-    // 4. ヘッダー追従
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        document.body.classList.add('scrolled');
-      } else {
-        document.body.classList.remove('scrolled');
-      }
+    // 4. 横スワイプ機能（Swiper）の初期化
+    const swiper = new Swiper(".mySwiper", {
+      slidesPerView: "auto",      // CSSで設定した幅を自動計算
+      centeredSlides: true,       // 常に画像を画面の真ん中に持ってくる
+      spaceBetween: 30,           // 写真と写真の間の余白
+      grabCursor: true,           // マウスで掴めるカーソルにする
+      loop: true,                 // 最後までスワイプしたら1枚目に戻る無限ループ
+      speed: 600,                 // スワイプの滑らかさ
     });
 
-    // 5. ふわっと表示
+    // 5. ヘッダー追従
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) { document.body.classList.add('scrolled'); } 
+      else { document.body.classList.remove('scrolled'); }
+    });
+
+    // 6. ふわっと表示
     const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
