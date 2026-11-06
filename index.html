@@ -3,242 +3,459 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>さく研究所 | SAKU KENKYUJO COLLECTION</title>
+  <title>サク KYOTO | LOOKBOOK</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* -------------------------------------
-       ベース設定
-    ------------------------------------- */
-    :root {
-      --bg-color: #000;
-      --text-color: #fff;
-      --font-main: "Helvetica Neue", "Arial", "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
-    }
-
-    body, html {
+    /* ------------------------------------------
+       ベースリセット・共通設定
+    ------------------------------------------ */
+    *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      width: 100%;
-      height: 100%;
-      background-color: var(--bg-color);
-      font-family: var(--font-main);
-      overflow: hidden; /* 全体のスクロールバーを隠す */
     }
-
-    /* -------------------------------------
-       UIパーツ（ロゴ・ナビゲーション）
-       ※mix-blend-modeで背景色に合わせて自動反転
-    ------------------------------------- */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 30px 40px;
-      box-sizing: border-box;
-      z-index: 100;
-      pointer-events: none; /* 下の画像へのクリックを邪魔しない */
-      mix-blend-mode: difference;
-      color: var(--text-color);
+    body {
+      background-color: #faf9f5;
+      color: #2b2b2b;
+      font-family: 'Shippori Mincho', "Yu Mincho", "Hiragino Mincho ProN", serif;
+      line-height: 1.8;
+      letter-spacing: 0.05em;
+      -webkit-font-smoothing: antialiased;
     }
-
-    .logo {
-      font-size: 14px;
-      font-weight: 400;
-      letter-spacing: 0.3em;
-      margin: 0;
-    }
-
-    /* 右上のMakeShopリンク */
-    .nav a {
-      pointer-events: auto; /* リンクはクリック可能に */
-      color: var(--text-color);
+    a {
+      color: inherit;
       text-decoration: none;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ------------------------------------------
+       ヘッダー
+    ------------------------------------------ */
+    .site-header {
+      padding: 40px 20px 20px;
+      text-align: center;
+      background-color: #faf9f5;
+    }
+    .brand-logo {
+      font-family: 'Cormorant Garamond', 'Shippori Mincho', serif;
+      font-size: 26px;
+      letter-spacing: 0.25em;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    /* ------------------------------------------
+       コンセプトセクション
+    ------------------------------------------ */
+    .concept-section {
+      padding: 50px 24px 70px;
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .concept-title {
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      margin-bottom: 16px;
+    }
+    .concept-lead {
+      font-size: 15px;
+      color: #666;
+      margin-bottom: 36px;
+      letter-spacing: 0.08em;
+    }
+    .concept-ja {
+      font-size: 16px;
+      line-height: 2.2;
+      margin-bottom: 32px;
+      letter-spacing: 0.08em;
+    }
+    .concept-en {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 16px;
+      color: #555;
+      font-style: italic;
+      line-height: 1.9;
+      letter-spacing: 0.04em;
+    }
+
+    /* ------------------------------------------
+       ルックブック（メイソンリーギャラリー）
+       ※縦長画像が絶対に切れないエディトリアル仕様
+    ------------------------------------------ */
+    .lookbook-section {
+      padding: 0 24px 90px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .masonry-gallery {
+      column-count: 3;        /* PC表示：3列 */
+      column-gap: 32px;
+    }
+    @media (max-width: 1024px) {
+      .masonry-gallery {
+        column-count: 2;
+        column-gap: 24px;
+      }
+    }
+    @media (max-width: 640px) {
+      .lookbook-section {
+        padding: 0 16px 60px;
+      }
+      .masonry-gallery {
+        column-count: 2;      /* スマホ表示：2列で美しく敷き詰める */
+        column-gap: 16px;
+      }
+    }
+    .look-card {
+      break-inside: avoid;
+      margin-bottom: 36px;
+      display: block;
+    }
+    @media (max-width: 640px) {
+      .look-card {
+        margin-bottom: 20px;
+      }
+    }
+    .look-image-wrap {
+      width: 100%;
+      background-color: #f0eee9;
+      overflow: hidden;
+    }
+    .look-image-wrap img {
+      width: 100%;
+      height: auto;           /* 縦長カットも頭から足先まで完全表示 */
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+    }
+    .look-card:hover .look-image-wrap img {
+      transform: scale(1.02);
+      opacity: 0.95;
+    }
+    .look-meta {
+      padding-top: 10px;
+    }
+    .look-number {
+      display: block;
+      font-family: 'Cormorant Garamond', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      color: #888;
+      font-weight: 600;
+    }
+    .look-desc {
+      font-size: 13px;
+      color: #333;
+      margin-top: 2px;
+    }
+    @media (max-width: 640px) {
+      .look-desc {
+        font-size: 12px;
+      }
+    }
+
+    /* ------------------------------------------
+       店舗情報 & リンク
+    ------------------------------------------ */
+    .info-section {
+      background-color: #f3f1ea;
+      padding: 80px 24px;
+      border-top: 1px solid #e7e4dc;
+    }
+    .info-container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: 500;
+      text-align: center;
+      letter-spacing: 0.15em;
+      margin-bottom: 40px;
+    }
+    .shop-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 60px;
+    }
+    @media (max-width: 768px) {
+      .shop-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+    .shop-card {
+      background: #faf9f5;
+      padding: 30px;
+      border: 1px solid #e2ded5;
+    }
+    .shop-name {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid #2b2b2b;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+    .shop-details dt {
+      font-size: 12px;
+      font-weight: 600;
+      color: #777;
+      margin-top: 14px;
+      letter-spacing: 0.05em;
+    }
+    .shop-details dd {
+      font-size: 14px;
+      margin: 0;
+      color: #2b2b2b;
+      line-height: 1.7;
+    }
+    .shop-details .note {
+      display: inline-block;
+      font-size: 12px;
+      color: #777;
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    /* リンク・ボタンエリア */
+    .links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      text-align: center;
+    }
+    @media (max-width: 640px) {
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .link-box {
+      background: #faf9f5;
+      padding: 30px 24px;
+      border: 1px solid #e2ded5;
+    }
+    .link-box h4 {
+      font-size: 15px;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+    .link-box p {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .btn-action {
+      display: inline-block;
+      padding: 12px 30px;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      background-color: #2b2b2b;
+      color: #fff;
+      transition: background-color 0.2s ease, opacity 0.2s ease;
+    }
+    .btn-action:hover {
+      background-color: #555;
+    }
+    .btn-action.outline {
+      background-color: transparent;
+      color: #2b2b2b;
+      border: 1px solid #2b2b2b;
+    }
+    .btn-action.outline:hover {
+      background-color: #2b2b2b;
+      color: #fff;
+    }
+
+    /* ------------------------------------------
+       フッター
+    ------------------------------------------ */
+    .site-footer {
+      padding: 40px 20px;
+      text-align: center;
       font-size: 11px;
       letter-spacing: 0.15em;
-      position: relative;
-      padding-bottom: 4px;
-      transition: opacity 0.3s ease;
-    }
-
-    .nav a::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 1px;
-      background-color: currentColor;
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-
-    .nav a:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-
-    /* -------------------------------------
-       スクロール設定（スナップ機能）
-    ------------------------------------- */
-    .scroll-container {
-      width: 100%;
-      height: 100vh;
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
-      -ms-overflow-style: none; 
-      scrollbar-width: none;    
-    }
-    .scroll-container::-webkit-scrollbar {
-      display: none; 
-    }
-
-    /* 各セクション */
-    .page {
-      width: 100%;
-      height: 100vh;
-      scroll-snap-align: start;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: var(--bg-color);
-    }
-
-    /* -------------------------------------
-       画像とアニメーション設定
-    ------------------------------------- */
-    .page img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* 画面いっぱいに美しくトリミング */
-      opacity: 0;
-      transform: scale(1.05); /* 初期状態は少し拡大 */
-      transition: opacity 1.5s cubic-bezier(0.25, 1, 0.5, 1), 
-                  transform 2s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    /* スクロールで画面内に入った時のクラス */
-    .page.is-visible img {
-      opacity: 1;
-      transform: scale(1); /* 等倍にゆっくり戻る高級感のある動き */
-    }
-
-    /* -------------------------------------
-       下部のMakeShopリンク（各画像用）
-    ------------------------------------- */
-    .shop-link-bottom {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--text-color);
-      text-decoration: none;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      mix-blend-mode: difference;
-      opacity: 0.8;
-      transition: opacity 0.3s ease, letter-spacing 0.3s ease;
-      z-index: 10;
-    }
-
-    .shop-link-bottom:hover {
-      opacity: 1;
-      letter-spacing: 0.3em;
-    }
-
-    /* スマホ表示用の微調整 */
-    @media (max-width: 768px) {
-      .header {
-        padding: 20px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-      }
+      color: #888;
+      background-color: #faf9f5;
     }
   </style>
 </head>
 <body>
 
-  <!-- 追従するヘッダー -->
-  <header class="header">
-    <h1 class="logo">SAKU KENKYUJO</h1>
-    <nav class="nav">
-      <!-- 画面右上の固定リンク -->
-      <a href="https://www.makeshop.jp/" class="global-shop-url" target="_blank">ONLINE STORE</a>
-    </nav>
+  <!-- ヘッダー -->
+  <header class="site-header">
+    <div class="brand-logo">SAKU KYOTO</div>
   </header>
 
-  <!-- 写真が展開されるエリア -->
-  <div class="scroll-container" id="gallery">
-    <!-- JavaScriptで自動生成されます -->
-  </div>
+  <main>
+    <!-- ブランドコンセプト -->
+    <section class="concept-section">
+      <h1 class="concept-title">サク KYOTO</h1>
+      <p class="concept-lead">さく研究所の新しいものづくり「サク KYOTO」始まります。</p>
+      
+      <p class="concept-ja">
+        心地よく上質な素材を使った日本のものづくり。<br>
+        自由だけどルーズじゃない。<br>
+        日常だけど特別な衣。<br>
+        京都の街よりお届けです。
+      </p>
 
-  <script>
-    // ==========================================
-    // カスタマイズ設定
-    // ==========================================
-    const totalImages = 15; // 表示する枚数（15枚準備済み）
-    const shopUrl = "https://www.makeshop.jp/"; // さく研究所のMakeShopのURLに変更してください
-    // ==========================================
+      <p class="concept-en">
+        The new creative journey of Saku Laboratory begins.<br>
+        Rooted in Japanese craftsmanship,<br>
+        we create pieces using comfortable, refined, high-quality materials.<br>
+        Free, yet never careless.<br>
+        Everyday, yet always special.<br>
+        Bringing you something special from the streets of Kyoto.
+      </p>
+    </section>
 
-    // 右上のリンク先のURLを一括設定
-    document.querySelector('.global-shop-url').href = shopUrl;
+    <!-- ルックブックギャラリー（画像パスは実際のリポジトリに合わせて変更してください） -->
+    <section class="lookbook-section">
+      <div class="masonry-gallery">
 
-    const gallery = document.getElementById('gallery');
+        <!-- 1枚目 -->
+        <article class="look-card">
+          <div class="look-image-wrap">
+            <img src="images/look01.jpg" alt="LOOK 01" loading="lazy">
+          </div>
+          <div class="look-meta">
+            <span class="look-number">LOOK 01</span>
+            <p class="look-desc">単衣着物 / 麻混</p>
+          </div>
+        </article>
 
-    // 1. 画像セクションの生成
-    for (let i = 1; i <= totalImages; i++) {
-      const fileName = `saku_${i}.jpg`; 
+        <!-- 2枚目 -->
+        <article class="look-card">
+          <div class="look-image-wrap">
+            <img src="images/look02.jpg" alt="LOOK 02" loading="lazy">
+          </div>
+          <div class="look-meta">
+            <span class="look-number">LOOK 02</span>
+            <p class="look-desc">八寸名古屋帯</p>
+          </div>
+        </article>
 
-      const section = document.createElement('div');
-      section.className = 'page';
+        <!-- 3枚目 -->
+        <article class="look-card">
+          <div class="look-image-wrap">
+            <img src="images/look03.jpg" alt="LOOK 03" loading="lazy">
+          </div>
+          <div class="look-meta">
+            <span class="look-number">LOOK 03</span>
+            <p class="look-desc">洗える絹小紋</p>
+          </div>
+        </article>
 
-      const img = document.createElement('img');
-      img.src = fileName;
-      img.alt = `SAKU KENKYUJO COLLECTION ${i}`;
-      // 画面に見えるまで画像の読み込みを遅らせてサイトを軽くする
-      img.loading = "lazy"; 
+        <!-- 4枚目 -->
+        <article class="look-card">
+          <div class="look-image-wrap">
+            <img src="images/look04.jpg" alt="LOOK 04" loading="lazy">
+          </div>
+          <div class="look-meta">
+            <span class="look-number">LOOK 04</span>
+            <p class="look-desc">八坂の塔 前にて</p>
+          </div>
+        </article>
 
-      const link = document.createElement('a');
-      link.href = shopUrl;
-      link.className = 'shop-link-bottom';
-      link.textContent = 'DISCOVER MORE'; 
-      link.target = "_blank"; 
+        <!-- 5枚目 -->
+        <article class="look-card">
+          <div class="look-image-wrap">
+            <img src="images/look05.jpg" alt="LOOK 05" loading="lazy">
+          </div>
+          <div class="look-meta">
+            <span class="look-number">LOOK 05</span>
+            <p class="look-desc">レース羽織</p>
+          </div>
+        </article>
 
-      section.appendChild(img);
-      section.appendChild(link);
-      gallery.appendChild(section);
-    }
+        <!-- 6枚目 -->
+        <article class="look-card">
+          <div class="look-image-wrap">
+            <img src="images/look06.jpg" alt="LOOK 06" loading="lazy">
+          </div>
+          <div class="look-meta">
+            <span class="look-number">LOOK 06</span>
+            <p class="look-desc">京仕立て 草履・小物</p>
+          </div>
+        </article>
 
-    // 2. スクロールに合わせた極上のアニメーション（Intersection Observer）
-    // 画面の50%に入ったら「is-visible」クラスを付けてアニメーション発火
-    const observerOptions = {
-      root: document.querySelector('.scroll-container'),
-      rootMargin: '0px',
-      threshold: 0.5 
-    };
+      </div>
+    </section>
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-        } else {
-          // 画面から外れたらクラスを外す（再度スクロールした時にアニメーションさせるため）
-          entry.target.classList.remove('is-visible');
-        }
-      });
-    }, observerOptions);
+    <!-- 店舗情報 & お問い合わせ -->
+    <section class="info-section">
+      <div class="info-container">
+        
+        <h2 class="section-title">店舗情報</h2>
+        
+        <div class="shop-grid">
+          <!-- 居内商店 -->
+          <div class="shop-card">
+            <h3 class="shop-name">＜居内商店＞</h3>
+            <dl class="shop-details">
+              <dt>住所</dt>
+              <dd>京都市東山区星野町 88-1</dd>
+              <dt>アクセス</dt>
+              <dd>
+                八坂の塔（法観寺）のすぐ目の前です。<br>
+                <span class="note">※現在マップアプリ上で以前の店舗名が表示される場合があるため、目の前にある八坂の塔を目印にお越しください。</span>
+              </dd>
+              <dt>営業時間</dt>
+              <dd>11:00 〜 19:00</dd>
+              <dt>定休日</dt>
+              <dd>原則年内無休（臨時休業日などはゴフクヤサンドットコム SNSでお知らせ有）</dd>
+            </dl>
+          </div>
 
-    // 全ての.page要素を監視対象にする
-    document.querySelectorAll('.page').forEach(page => {
-      observer.observe(page);
-    });
-  </script>
+          <!-- ゴフクヤサンドットコム -->
+          <div class="shop-card">
+            <h3 class="shop-name">＜ゴフクヤサンドットコム＞</h3>
+            <dl class="shop-details">
+              <dt>住所</dt>
+              <dd>大阪府大阪市中央区船場中 3 丁目 船場センタービル 7号館 B1 北側</dd>
+              <dt>営業時間</dt>
+              <dd>11:00 〜 17:00</dd>
+              <dt>定休日</dt>
+              <dd>原則年内無休（臨時休業日などはゴフクヤサンドットコム SNSでお知らせ有）</dd>
+            </dl>
+          </div>
+        </div>
+
+        <!-- リンクエリア -->
+        <div class="links-grid">
+          <div class="link-box">
+            <h4>ONLINE STORE</h4>
+            <p>さく研究所の通常商品はこちらからお買い物していただけます。</p>
+            <a href="https://store.gofukuyasan.com/" target="_blank" rel="noopener noreferrer" class="btn-action">
+              ONLINE STORE &rarr;
+            </a>
+          </div>
+
+          <div class="link-box">
+            <h4>CONTACT</h4>
+            <p>商品や店舗に関するご質問・ご相談はこちらから承ります。</p>
+            <a href="https://store.gofukuyasan.com/html/email.html" target="_blank" rel="noopener noreferrer" class="btn-action outline">
+              お問い合せフォーム &rarr;
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; SAKU KYOTO / GOFUKUYASAN. All Rights Reserved.</p>
+  </footer>
+
 </body>
 </html>
