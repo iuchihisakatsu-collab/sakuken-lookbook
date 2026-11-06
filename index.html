@@ -8,6 +8,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
   
+  <!-- 画像拡大エフェクト（Fancybox）の最先端スタイルシート -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+
   <style>
     /* ------------------------------------------
        ベースリセット・共通設定
@@ -162,9 +165,11 @@
       display: block;
     }
     .hero-image-wrap {
+      display: block; /* aタグになるため必須 */
       width: 100%;
       overflow: hidden;
       background-color: #eee;
+      cursor: zoom-in;
     }
     .hero-image-wrap img {
       width: 100%;
@@ -181,8 +186,8 @@
       text-align: center;
     }
     .hero-meta .look-number {
-      font-size: 15px; /* 通常より少し大きく */
-      letter-spacing: 0.3em; /* 文字間を広くして特別感を演出 */
+      font-size: 15px; 
+      letter-spacing: 0.3em;
     }
     @media (max-width: 640px) { 
       .hero-look { margin-bottom: 48px; } 
@@ -204,14 +209,15 @@
       break-inside: avoid;
       margin-bottom: 40px;
       display: block;
-      cursor: crosshair;
     }
     @media (max-width: 640px) { .look-card { margin-bottom: 24px; } }
     
     .look-image-wrap {
+      display: block; /* aタグになるため必須 */
       width: 100%;
       overflow: hidden;
       background-color: #eee;
+      cursor: zoom-in;
     }
     .look-image-wrap img {
       width: 100%;
@@ -385,9 +391,10 @@
       
       <!-- どかーんと見せる1枚目（ヒーロールック） -->
       <article class="hero-look fade-up">
-        <div class="hero-image-wrap">
+        <!-- クリックで拡大させるため a タグに変更 -->
+        <a href="saku_1.jpg" data-fancybox="gallery" data-caption="LOOK 01" class="hero-image-wrap">
           <img src="saku_1.jpg" alt="LOOK 01" loading="eager">
-        </div>
+        </a>
         <div class="hero-meta">
           <span class="look-number">LOOK 01</span>
         </div>
@@ -397,72 +404,100 @@
       <div class="masonry-gallery">
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_2.jpg" alt="LOOK 02" loading="lazy"></div>
+          <a href="saku_2.jpg" data-fancybox="gallery" data-caption="LOOK 02" class="look-image-wrap">
+            <img src="saku_2.jpg" alt="LOOK 02" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 02</span></div>
         </article>
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_3.jpg" alt="LOOK 03" loading="lazy"></div>
+          <a href="saku_3.jpg" data-fancybox="gallery" data-caption="LOOK 03" class="look-image-wrap">
+            <img src="saku_3.jpg" alt="LOOK 03" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 03</span></div>
         </article>
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_4.jpg" alt="LOOK 04" loading="lazy"></div>
+          <a href="saku_4.jpg" data-fancybox="gallery" data-caption="LOOK 04" class="look-image-wrap">
+            <img src="saku_4.jpg" alt="LOOK 04" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 04</span></div>
         </article>
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_5.jpg" alt="LOOK 05" loading="lazy"></div>
+          <a href="saku_5.jpg" data-fancybox="gallery" data-caption="LOOK 05" class="look-image-wrap">
+            <img src="saku_5.jpg" alt="LOOK 05" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 05</span></div>
         </article>
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_6.jpg" alt="LOOK 06" loading="lazy"></div>
+          <a href="saku_6.jpg" data-fancybox="gallery" data-caption="LOOK 06" class="look-image-wrap">
+            <img src="saku_6.jpg" alt="LOOK 06" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 06</span></div>
         </article>
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_7.jpg" alt="LOOK 07" loading="lazy"></div>
+          <a href="saku_7.jpg" data-fancybox="gallery" data-caption="LOOK 07" class="look-image-wrap">
+            <img src="saku_7.jpg" alt="LOOK 07" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 07</span></div>
         </article>
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_8.jpg" alt="LOOK 08" loading="lazy"></div>
+          <a href="saku_8.jpg" data-fancybox="gallery" data-caption="LOOK 08" class="look-image-wrap">
+            <img src="saku_8.jpg" alt="LOOK 08" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 08</span></div>
         </article>
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_9.jpg" alt="LOOK 09" loading="lazy"></div>
+          <a href="saku_9.jpg" data-fancybox="gallery" data-caption="LOOK 09" class="look-image-wrap">
+            <img src="saku_9.jpg" alt="LOOK 09" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 09</span></div>
         </article>
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_10.jpg" alt="LOOK 10" loading="lazy"></div>
+          <a href="saku_10.jpg" data-fancybox="gallery" data-caption="LOOK 10" class="look-image-wrap">
+            <img src="saku_10.jpg" alt="LOOK 10" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 10</span></div>
         </article>
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_11.jpg" alt="LOOK 11" loading="lazy"></div>
+          <a href="saku_11.jpg" data-fancybox="gallery" data-caption="LOOK 11" class="look-image-wrap">
+            <img src="saku_11.jpg" alt="LOOK 11" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 11</span></div>
         </article>
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_12.jpg" alt="LOOK 12" loading="lazy"></div>
+          <a href="saku_12.jpg" data-fancybox="gallery" data-caption="LOOK 12" class="look-image-wrap">
+            <img src="saku_12.jpg" alt="LOOK 12" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 12</span></div>
         </article>
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_13.jpg" alt="LOOK 13" loading="lazy"></div>
+          <a href="saku_13.jpg" data-fancybox="gallery" data-caption="LOOK 13" class="look-image-wrap">
+            <img src="saku_13.jpg" alt="LOOK 13" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 13</span></div>
         </article>
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_14.jpg" alt="LOOK 14" loading="lazy"></div>
+          <a href="saku_14.jpg" data-fancybox="gallery" data-caption="LOOK 14" class="look-image-wrap">
+            <img src="saku_14.jpg" alt="LOOK 14" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 14</span></div>
         </article>
 
         <article class="look-card fade-up">
-          <div class="look-image-wrap"><img src="saku_15.jpg" alt="LOOK 15" loading="lazy"></div>
+          <a href="saku_15.jpg" data-fancybox="gallery" data-caption="LOOK 15" class="look-image-wrap">
+            <img src="saku_15.jpg" alt="LOOK 15" loading="lazy">
+          </a>
           <div class="look-meta"><span class="look-number">LOOK 15</span></div>
         </article>
 
@@ -532,8 +567,12 @@
     <p>&copy; SAKU KYOTO / GOFUKUYASAN. All Rights Reserved.</p>
   </footer>
 
-  <!-- 最先端スムーススクロールライブラリ (Lenis) -->
+  <!-- スムーススクロール (Lenis) -->
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  
+  <!-- 画像拡大エフェクト (Fancybox) の最先端スクリプト -->
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
   <script>
     // 1. ローディング画面の解除
     window.addEventListener('load', () => {
@@ -554,7 +593,24 @@
     }
     requestAnimationFrame(raf);
 
-    // 3. ヘッダーのスクロール検知
+    // 3. ギャラリー拡大機能 (Fancybox) のプレミアム設定
+    Fancybox.bind('[data-fancybox="gallery"]', {
+      hideScrollbar: false,
+      Toolbar: {
+        display: {
+          left: [],
+          middle: ["infobar"],
+          right: ["close"],
+        },
+      },
+      Images: {
+        zoom: false, // UIをシンプルにするためにズームアイコンを非表示
+      },
+      // スワイプによる滑らかな切り替えと、下スワイプでの閉じる動作を有効化
+      dragToClose: true, 
+    });
+
+    // 4. ヘッダーのスクロール検知
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
@@ -564,7 +620,7 @@
       }
     });
 
-    // 4. スクロールに合わせたふわっと表示
+    // 5. スクロールに合わせたふわっと表示
     const observerOptions = {
       root: null,
       rootMargin: '0px',
