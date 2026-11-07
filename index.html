@@ -2,7 +2,8 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- スマホでの意図しないズーム崩れを防止 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>SAKU KYOTO | 2027 COLLECTION</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -125,8 +126,11 @@
     .category-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 3.5vw, 3.5rem); font-weight: 300; font-style: italic; line-height: 1; letter-spacing: 0.02em; color: var(--text-main); }
 
     .swiper-fashion { width: 100%; padding: 0 5vw; overflow: visible; }
-    .swiper-slide { width: 75vw; max-width: 400px; }
-    @media (min-width: 768px) { .swiper-slide { width: 30vw; max-width: 480px; } }
+    
+    /* スライドの幅設定（過度な縮小を防ぐために最小幅を保証） */
+    .swiper-slide { width: 75vw; min-width: 260px; max-width: 400px; }
+    @media (min-width: 768px) { .swiper-slide { width: 30vw; min-width: 320px; max-width: 480px; } }
+
     .look-item { display: block; overflow: hidden; cursor: zoom-in; }
     .look-item img { width: 100%; aspect-ratio: 2 / 3; object-fit: cover; transition: transform 1.2s cubic-bezier(0.2, 1, 0.2, 1), filter 0.8s ease; filter: grayscale(15%); }
     .look-item:hover img { transform: scale(1.02); filter: grayscale(0%); }
@@ -184,7 +188,7 @@
       <p class="statement-en">Rooted in Japanese craftsmanship, we create pieces using comfortable, refined, high-quality materials.</p>
     </section>
 
-    <!-- コレクション群（変更なし） -->
+    <!-- コレクション群 -->
     <section class="collections-wrap">
       <div class="collection-row fade-up">
         <div class="collection-heading"><span class="chapter-num">CHAPTER 01</span><h2 class="category-title">Cross Kimono</h2></div>
@@ -334,7 +338,6 @@
     const sliderContainer = document.getElementById('hero-slider');
     let currentSlide = 0;
     
-    // 多めに「15枚」をDOMに生成してバリエーションを持たせる
     const slideCount = Math.min(15, randomizedImages.length);
     for(let i=0; i<slideCount; i++){
       const slideDiv = document.createElement('div');
@@ -346,17 +349,15 @@
     }
     const slides = document.querySelectorAll('.hero-slide');
 
-    // スライド切り替え関数
     function nextSlide() {
       slides[currentSlide].classList.remove('is-active');
       currentSlide = (currentSlide + 1) % slides.length;
       slides[currentSlide].classList.add('is-active');
     }
 
-    // 自動再生（4.5秒ごと）
     let slideInterval = setInterval(nextSlide, 4500);
 
-    // --- 3. カスタムカーソル ＆ パララックス ＆ クリック ---
+    // --- 3. カスタムカーソル ＆ パララックス ---
     const customCursor = document.getElementById('custom-cursor');
     
     sliderContainer.addEventListener('mouseenter', () => {
@@ -386,6 +387,27 @@
       slideInterval = setInterval(nextSlide, 4500);
     });
 
+    // --- 4. コレクション・スワイプ (Swiper) と 強制リフレッシュ ---
+    const swiperInstances = [];
+    document.querySelectorAll('.swiper-fashion').forEach(el => {
+      const swiper = new Swiper(el, { 
+        slidesPerView: "auto", 
+        spaceBetween: 40, 
+        grabCursor: true, 
+        freeMode: true,
+        observer: true,
+        observeParents: true,
+        resizeObserver: true,
+        breakpoints: { 768: { spaceBetween: 60 } } 
+      });
+      swiperInstances.push(swiper);
+    });
+
+    // ブラウザのズームや画面サイズ変更時にSwiperを強制的に再計算（バグ解消）
+    window.addEventListener('resize', () => {
+      swiperInstances.forEach(swiper => swiper.update());
+    });
+
     // --- その他の基本スクリプト ---
     window.addEventListener('load', () => {
       setTimeout(() => { document.body.classList.add('loaded'); }, 600);
@@ -394,10 +416,6 @@
     const lenis = new Lenis({ duration: 1.6, smooth: true });
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
-
-    document.querySelectorAll('.swiper-fashion').forEach(el => {
-      new Swiper(el, { slidesPerView: "auto", spaceBetween: 40, grabCursor: true, freeMode: true, breakpoints: { 768: { spaceBetween: 60 } } });
-    });
 
     Fancybox.bind('[data-fancybox="gallery"]', { Thumbs: false, Toolbar: false, clickContent: "close", clickSlide: "close", dragToClose: true, Images: { zoom: false } });
 
