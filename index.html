@@ -465,4 +465,114 @@
         <div class="swiper swiper-fashion">
           <div class="swiper-wrapper">
             <div class="swiper-slide"><a href="images/2026_tonbi/saku_1.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_tonbi/saku_1.jpg" alt="Tonbi 01" loading="lazy"></a><div class="look-number-label">LOOK 01</div></div>
-            <div class="swiper-slide"><a href="
+            <div class="swiper-slide"><a href="images/2026_tonbi/saku_2.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_tonbi/saku_2.jpg" alt="Tonbi 02" loading="lazy"></a><div class="look-number-label">LOOK 02</div></div>
+            <div class="swiper-slide"><a href="images/2026_tonbi/saku_3.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_tonbi/saku_3.jpg" alt="Tonbi 03" loading="lazy"></a><div class="look-number-label">LOOK 03</div></div>
+            <div class="swiper-slide"><a href="images/2026_tonbi/saku_4.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_tonbi/saku_4.jpg" alt="Tonbi 04" loading="lazy"></a><div class="look-number-label">LOOK 04</div></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- 6. 店舗情報 & コンタクト -->
+    <section class="store-info-section scroll-reveal">
+      <div class="info-inner">
+        <h2 class="info-section-title">STORE LOCATIONS</h2>
+        <div class="stores-grid">
+          <div class="store-card">
+            <h3 class="store-title">居内商店（京都）</h3>
+            <dl class="store-list">
+              <dt>Address</dt><dd>京都市東山区星野町 88-1</dd>
+              <dt>Location</dt><dd>八坂の塔（法観寺）真正面<br><span class="map-note">※マップ上では以前の店舗名が表示される場合があります。</span></dd>
+              <dt>Hours</dt><dd>11:00 - 19:00</dd>
+              <dt>Holiday</dt><dd>原則年中無休</dd>
+            </dl>
+          </div>
+          <div class="store-card">
+            <h3 class="store-title">ゴフクヤサンドットコム（大阪）</h3>
+            <dl class="store-list">
+              <dt>Address</dt><dd>大阪市中央区船場中央 3-2-7<br>船場センタービル 7号館 B1F 北側</dd>
+              <dt>Hours</dt><dd>11:00 - 17:00</dd>
+              <dt>Holiday</dt><dd>原則年中無休</dd>
+            </dl>
+          </div>
+        </div>
+
+        <div class="action-links-grid">
+          <div class="action-card">
+            <h4>ONLINE STORE</h4>
+            <p>さく研究所の全コレクション・商品はこちら</p>
+            <a href="https://store.gofukuyasan.com/" target="_blank" class="button-core">VISIT STORE</a>
+          </div>
+          <div class="action-card">
+            <h4>CONTACT</h4>
+            <p>作品や取扱店舗に関するお問い合わせ</p>
+            <a href="https://store.gofukuyasan.com/html/email.html" target="_blank" class="button-core subtle">SEND MESSAGE</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; SAKU KYOTO / GOFUKUYASAN. ALL RIGHTS RESERVED.</p>
+  </footer>
+
+  <!-- スクリプト -->
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+  <script>
+    // 1. ローダー演出
+    window.addEventListener('load', () => {
+      setTimeout(() => { document.body.classList.add('loaded'); }, 600);
+    });
+
+    // 2. 慣性スクロール
+    const lenis = new Lenis({ duration: 1.4, smooth: true });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+
+    // 3. 各カテゴリーの横スワイプ初期化
+    document.querySelectorAll('.swiper-fashion').forEach(el => {
+      new Swiper(el, {
+        slidesPerView: "auto",
+        spaceBetween: 22,
+        grabCursor: true,
+        freeMode: true,
+        breakpoints: {
+          768: { spaceBetween: 34 }
+        }
+      });
+    });
+
+    // 4. 枠なし・サムネイルなし・1タップ閉じるポップアップ
+    Fancybox.bind('[data-fancybox="gallery"]', {
+      Thumbs: false,
+      Toolbar: false,
+      clickContent: "close",
+      clickSlide: "close",
+      dragToClose: true,
+      Images: { zoom: false },
+    });
+
+    // 5. ヘッダー追従・スクロールフェードイン
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    });
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
