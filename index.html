@@ -24,7 +24,6 @@
     .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
     .lenis.lenis-stopped { overflow: hidden; }
 
-    /* --- スマホ縮小バグ防止の特効薬 --- */
     html, body {
       width: 100%;
       position: relative;
@@ -32,7 +31,7 @@
     }
     main {
       width: 100%;
-      overflow: hidden; /* iOS Safariの勘違い縮小をここで完全にブロック */
+      overflow: hidden;
     }
 
     body {
@@ -46,40 +45,52 @@
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; height: auto; display: block; }
 
-    /* --- ローディング --- */
+    /* --- ローディング（ロゴを300pxに拡大して主役に） --- */
     #preloader {
       position: fixed; inset: 0; background: var(--bg-color); z-index: 9999;
       display: flex; align-items: center; justify-content: center;
       transition: opacity 1.4s cubic-bezier(0.8, 0, 0.1, 1), visibility 1.4s ease;
     }
     .loader-logo {
-      max-width: 220px; mix-blend-mode: multiply; opacity: 0; transform: translateY(15px);
+      width: 80vw;
+      max-width: 300px; /* 前回の220pxから300pxへ堂々と拡大 */
+      mix-blend-mode: multiply;
+      opacity: 0;
+      transform: translateY(15px);
       animation: loaderFade 2s cubic-bezier(0.2, 1, 0.2, 1) forwards;
     }
     @keyframes loaderFade { 0% { opacity: 0; transform: translateY(15px); } 100% { opacity: 1; transform: translateY(0); } }
     .loaded #preloader { opacity: 0; visibility: hidden; }
 
-    /* --- ヘッダー --- */
+    /* --- ヘッダー（初期サイズを58pxに拡大） --- */
     .site-header {
-      position: fixed; top: 0; width: 100%; padding: 40px 40px;
+      position: fixed; top: 0; width: 100%; padding: 36px 40px;
       display: flex; justify-content: center; background: transparent;
-      z-index: 200; transition: padding 0.6s ease, background 0.6s ease;
+      z-index: 200; transition: padding 0.5s ease, background 0.5s ease;
     }
     .scrolled .site-header {
-      padding: 20px 40px; background: rgba(252, 252, 252, 0.9);
+      padding: 16px 40px; background: rgba(252, 252, 252, 0.92);
       backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
     }
-    .header-logo-img { max-height: 40px; mix-blend-mode: multiply; transition: max-height 0.6s ease; }
-    .scrolled .header-logo-img { max-height: 24px; }
+    .header-logo-img {
+      max-height: 58px; /* 前回の40pxから58pxへ拡大して視認性アップ */
+      width: auto;
+      mix-blend-mode: multiply;
+      transition: max-height 0.5s cubic-bezier(0.2, 1, 0.2, 1);
+    }
+    .scrolled .header-logo-img {
+      max-height: 28px; /* スクロール後は邪魔にならない上品なサイズへ */
+    }
 
     /* --- インタラクティブ・ファーストビュー --- */
     .hero-interactive-section {
       width: 100%; height: 100vh;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      position: relative; padding-top: 60px;
+      position: relative; padding-top: 80px;
     }
     .hero-slider-container {
-      width: 90%; max-width: 700px; height: 75vh;
+      width: 90%; max-width: 700px; height: 74vh;
       position: relative; overflow: hidden;
       cursor: none; 
     }
@@ -135,8 +146,6 @@
     .category-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 3.5vw, 3.5rem); font-weight: 300; font-style: italic; line-height: 1; letter-spacing: 0.02em; color: var(--text-main); }
 
     .swiper-fashion { width: 100%; padding: 0 5vw; overflow: visible; }
-    
-    /* スライドの幅設定 */
     .swiper-slide { width: 75vw; min-width: 260px; max-width: 400px; }
     @media (min-width: 768px) { .swiper-slide { width: 30vw; min-width: 320px; max-width: 480px; } }
 
@@ -172,32 +181,29 @@
 </head>
 <body>
 
+  <!-- ローディング（300pxに拡大） -->
   <div id="preloader">
     <img src="images/common/saku_logo.jpg" alt="SAKU KYOTO" class="loader-logo">
   </div>
 
   <div id="custom-cursor">NEXT</div>
 
+  <!-- ヘッダー（初期58pxに拡大） -->
   <header class="site-header" id="header">
     <a href="#"><img src="images/common/saku_logo.jpg" alt="SAKU KYOTO" class="header-logo-img"></a>
   </header>
 
   <main>
-    <!-- インタラクティブ・ファーストビュー -->
     <section class="hero-interactive-section">
-      <div class="hero-slider-container" id="hero-slider">
-        <!-- Javascriptでランダム生成 -->
-      </div>
+      <div class="hero-slider-container" id="hero-slider"></div>
       <div class="hero-meta">2027 Collection</div>
     </section>
 
-    <!-- ステートメント -->
     <section class="statement-section fade-up">
       <p class="statement-ja">心地よく上質な素材を使った日本のものづくり。<br>自由だけどルーズじゃない。<br>日常だけど特別な衣。<br>京都の街よりお届けです。</p>
       <p class="statement-en">Rooted in Japanese craftsmanship, we create pieces using comfortable, refined, high-quality materials.</p>
     </section>
 
-    <!-- コレクション群 -->
     <section class="collections-wrap">
       <div class="collection-row fade-up">
         <div class="collection-heading"><span class="chapter-num">CHAPTER 01</span><h2 class="category-title">Cross Kimono</h2></div>
@@ -294,7 +300,6 @@
       </div>
     </section>
 
-    <!-- 店舗情報 & コンタクト -->
     <section class="store-info-section fade-up">
       <div class="info-inner">
         <div class="stores-grid">
@@ -321,17 +326,12 @@
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
   <script>
-    // --- 1. JSで画像配列を生成＆シャッフル ---
     const imagePool = [];
-    
-    // 【衣服画像】
     for(let i=1; i<=15; i++) imagePool.push(`images/2026_crosskimono/saku_${i}.jpg`);
     for(let i=1; i<=15; i++) imagePool.push(`images/2026_gown/saku_${i}.jpg`);
     for(let i=1; i<=12; i++) imagePool.push(`images/2026_hakama/saku_${i}.jpg`);
     for(let i=1; i<=12; i++) imagePool.push(`images/2026_robe/saku_${i}.jpg`);
     for(let i=1; i<=4; i++) imagePool.push(`images/2026_tonbi/saku_${i}.jpg`);
-    
-    // 【刺身のつま（風景・雰囲気画像）14枚を追加】
     for(let i=1; i<=14; i++) imagePool.push(`images/2026_look/saku_${i}.jpg`);
     
     function shuffleArray(array) {
@@ -343,7 +343,6 @@
     }
     const randomizedImages = shuffleArray(imagePool);
 
-    // --- 2. ヒーロースライダーの構築 ---
     const sliderContainer = document.getElementById('hero-slider');
     let currentSlide = 0;
     
@@ -366,7 +365,6 @@
 
     let slideInterval = setInterval(nextSlide, 4500);
 
-    // --- 3. カスタムカーソル ＆ パララックス ---
     const customCursor = document.getElementById('custom-cursor');
     
     sliderContainer.addEventListener('mouseenter', () => {
@@ -396,7 +394,6 @@
       slideInterval = setInterval(nextSlide, 4500);
     });
 
-    // --- 4. コレクション・スワイプ (Swiper) と 強制リフレッシュ ---
     const swiperInstances = [];
     document.querySelectorAll('.swiper-fashion').forEach(el => {
       const swiper = new Swiper(el, { 
@@ -412,12 +409,10 @@
       swiperInstances.push(swiper);
     });
 
-    // ブラウザのズームや画面サイズ変更時にSwiperを強制的に再計算（バグ解消）
     window.addEventListener('resize', () => {
       swiperInstances.forEach(swiper => swiper.update());
     });
 
-    // --- その他の基本スクリプト ---
     window.addEventListener('load', () => {
       setTimeout(() => { document.body.classList.add('loaded'); }, 600);
     });
