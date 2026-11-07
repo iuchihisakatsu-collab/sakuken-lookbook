@@ -71,10 +71,10 @@
     .hero-slider-container {
       width: 90vw; max-width: 700px; height: 75vh;
       position: relative; overflow: hidden;
-      cursor: none; /* デフォルトカーソルを隠す */
+      cursor: none; 
     }
     .hero-slide {
-      position: absolute; inset: -20px; /* パララックス用のゆとり */
+      position: absolute; inset: -20px;
       opacity: 0; visibility: hidden;
       transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s ease-out;
     }
@@ -106,9 +106,8 @@
       font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.1em;
       pointer-events: none; z-index: 9999;
       opacity: 0; transform: translate(-50%, -50%) scale(0.5);
-      transition: opacity 0.3s ease, transform 0.1s linear; /* 追従をスムーズに */
+      transition: opacity 0.3s ease, transform 0.1s linear;
     }
-    /* スマホではカスタムカーソルを無効化 */
     @media (max-width: 768px) { #custom-cursor { display: none !important; } .hero-slider-container { cursor: pointer; } }
 
     /* --- ステートメント --- */
@@ -160,15 +159,12 @@
 </head>
 <body>
 
-  <!-- ローディング -->
   <div id="preloader">
     <img src="images/common/saku_logo.jpg" alt="SAKU KYOTO" class="loader-logo">
   </div>
 
-  <!-- カスタムカーソル -->
   <div id="custom-cursor">NEXT</div>
 
-  <!-- ヘッダー -->
   <header class="site-header" id="header">
     <a href="#"><img src="images/common/saku_logo.jpg" alt="SAKU KYOTO" class="header-logo-img"></a>
   </header>
@@ -177,7 +173,7 @@
     <!-- インタラクティブ・ファーストビュー -->
     <section class="hero-interactive-section">
       <div class="hero-slider-container" id="hero-slider">
-        <!-- Javascriptで全58枚の中からランダムに画像が生成・挿入されます -->
+        <!-- Javascriptでランダム生成 -->
       </div>
       <div class="hero-meta">2027 Collection</div>
     </section>
@@ -188,9 +184,8 @@
       <p class="statement-en">Rooted in Japanese craftsmanship, we create pieces using comfortable, refined, high-quality materials.</p>
     </section>
 
-    <!-- コレクション群（全5カテゴリーそのまま） -->
+    <!-- コレクション群（変更なし） -->
     <section class="collections-wrap">
-      <!-- 01: CROSS KIMONO -->
       <div class="collection-row fade-up">
         <div class="collection-heading"><span class="chapter-num">CHAPTER 01</span><h2 class="category-title">Cross Kimono</h2></div>
         <div class="swiper swiper-fashion">
@@ -213,7 +208,6 @@
           </div>
         </div>
       </div>
-      <!-- 02: GOWN -->
       <div class="collection-row fade-up">
         <div class="collection-heading"><span class="chapter-num">CHAPTER 02</span><h2 class="category-title">Gown</h2></div>
         <div class="swiper swiper-fashion">
@@ -236,7 +230,6 @@
           </div>
         </div>
       </div>
-      <!-- 03: HAKAMA -->
       <div class="collection-row fade-up">
         <div class="collection-heading"><span class="chapter-num">CHAPTER 03</span><h2 class="category-title">Hakama</h2></div>
         <div class="swiper swiper-fashion">
@@ -256,7 +249,6 @@
           </div>
         </div>
       </div>
-      <!-- 04: ROBE -->
       <div class="collection-row fade-up">
         <div class="collection-heading"><span class="chapter-num">CHAPTER 04</span><h2 class="category-title">Robe</h2></div>
         <div class="swiper swiper-fashion">
@@ -276,7 +268,6 @@
           </div>
         </div>
       </div>
-      <!-- 05: TONBI -->
       <div class="collection-row fade-up">
         <div class="collection-heading"><span class="chapter-num">CHAPTER 05</span><h2 class="category-title">Tonbi</h2></div>
         <div class="swiper swiper-fashion">
@@ -317,13 +308,18 @@
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
   <script>
-    // --- 1. JSで全58枚の画像配列を生成＆シャッフル ---
+    // --- 1. JSで画像配列を生成＆シャッフル ---
     const imagePool = [];
+    
+    // 【衣服画像】
     for(let i=1; i<=15; i++) imagePool.push(`images/2026_crosskimono/saku_${i}.jpg`);
     for(let i=1; i<=15; i++) imagePool.push(`images/2026_gown/saku_${i}.jpg`);
     for(let i=1; i<=12; i++) imagePool.push(`images/2026_hakama/saku_${i}.jpg`);
     for(let i=1; i<=12; i++) imagePool.push(`images/2026_robe/saku_${i}.jpg`);
     for(let i=1; i<=4; i++) imagePool.push(`images/2026_tonbi/saku_${i}.jpg`);
+    
+    // 【刺身のつま（風景・雰囲気画像）14枚を追加】
+    for(let i=1; i<=14; i++) imagePool.push(`images/2026_look/saku_${i}.jpg`);
     
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -338,8 +334,8 @@
     const sliderContainer = document.getElementById('hero-slider');
     let currentSlide = 0;
     
-    // 最初の10枚だけDOMに生成（軽量化のため）
-    const slideCount = Math.min(10, randomizedImages.length);
+    // 多めに「15枚」をDOMに生成してバリエーションを持たせる
+    const slideCount = Math.min(15, randomizedImages.length);
     for(let i=0; i<slideCount; i++){
       const slideDiv = document.createElement('div');
       slideDiv.className = 'hero-slide' + (i === 0 ? ' is-active' : '');
@@ -363,39 +359,32 @@
     // --- 3. カスタムカーソル ＆ パララックス ＆ クリック ---
     const customCursor = document.getElementById('custom-cursor');
     
-    // マウスがスライダー上に入ったらカーソルを表示
     sliderContainer.addEventListener('mouseenter', () => {
       customCursor.style.opacity = '1';
       customCursor.style.transform = 'translate(-50%, -50%) scale(1)';
     });
 
-    // マウスが離れたらカーソルを隠し、パララックスをリセット
     sliderContainer.addEventListener('mouseleave', () => {
       customCursor.style.opacity = '0';
       customCursor.style.transform = 'translate(-50%, -50%) scale(0.5)';
       slides.forEach(slide => { slide.style.transform = `translate(0px, 0px)`; });
     });
 
-    // マウス移動：カーソル追従 ＆ 写真のパララックス視差効果
     sliderContainer.addEventListener('mousemove', (e) => {
-      // カーソル追従
       customCursor.style.left = e.clientX + 'px';
       customCursor.style.top = e.clientY + 'px';
       
-      // パララックス（マウスと逆方向に画像を微妙に動かす）
       const rect = sliderContainer.getBoundingClientRect();
-      const x = (e.clientX - rect.left - rect.width / 2) / 25; // 動きの幅を調整
+      const x = (e.clientX - rect.left - rect.width / 2) / 25;
       const y = (e.clientY - rect.top - rect.height / 2) / 25;
       slides[currentSlide].style.transform = `translate(${-x}px, ${-y}px)`;
     });
 
-    // クリックで手動で次へ切り替え
     sliderContainer.addEventListener('click', () => {
       clearInterval(slideInterval);
       nextSlide();
       slideInterval = setInterval(nextSlide, 4500);
     });
-
 
     // --- その他の基本スクリプト ---
     window.addEventListener('load', () => {
