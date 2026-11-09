@@ -220,7 +220,7 @@
       transform: scale(1.1);
     }
 
-    /* --- クレジット --- */
+    /* --- クレジット（リンクなしの純粋なテキスト表記） --- */
     .credits-section {
       padding: 70px 5vw 90px;
       border-top: 1px solid #f0f0f0;
@@ -239,22 +239,15 @@
       .credits-section { padding: 50px 24px 70px; }
       .credits-grid { gap: 30px 40px; }
     }
-    .credit-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .credit-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
     .credit-role {
       font-family: 'Inter', sans-serif; font-size: 9.5px; font-weight: 300;
       letter-spacing: 0.28em; color: var(--text-muted); text-transform: uppercase;
     }
-    .credit-link {
-      display: inline-flex; flex-direction: column; align-items: center; gap: 3px;
-      font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: 0.12em;
-      color: var(--text-main); padding-bottom: 2px; border-bottom: 1px solid transparent;
-      transition: all 0.3s ease;
+    .credit-name-text {
+      font-family: 'Inter', 'Shippori Mincho', serif; font-size: 13px; letter-spacing: 0.12em;
+      color: var(--text-main); font-weight: 400;
     }
-    .credit-link .credit-handle {
-      font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; transition: color 0.3s ease;
-    }
-    .credit-link:hover { border-bottom-color: var(--text-main); opacity: 0.75; }
-    .credit-link:hover .credit-handle { color: var(--text-main); }
 
     .site-footer { padding: 30px 20px 80px; text-align: center; font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.3em; color: var(--text-muted); text-transform: uppercase; }
 
@@ -310,10 +303,10 @@
       <p class="statement-en">Rooted in Japanese craftsmanship, we create pieces using comfortable, refined, high-quality materials.</p>
     </section>
 
-    <!-- コレクション群（全8章構成） -->
+    <!-- コレクション群（全5章・トルソー統合構成） -->
     <section class="collections-wrap">
       
-      <!-- CHAPTER 01: CROSS KIMONO (15枚) -->
+      <!-- CHAPTER 01: CROSS KIMONO (モデル15枚 + トルソー10枚 = 計25枚) -->
       <div class="collection-row fade-up">
         <div class="collection-heading"><span class="chapter-num">CHAPTER 01</span><h2 class="category-title">Cross Kimono</h2></div>
         <div class="swiper swiper-fashion">
@@ -333,11 +326,21 @@
             <div class="swiper-slide"><a href="images/2026_crosskimono/saku_13.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_crosskimono/saku_13.jpg" loading="lazy"></a><div class="look-number-label">LOOK 13</div></div>
             <div class="swiper-slide"><a href="images/2026_crosskimono/saku_14.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_crosskimono/saku_14.jpg" loading="lazy"></a><div class="look-number-label">LOOK 14</div></div>
             <div class="swiper-slide"><a href="images/2026_crosskimono/saku_15.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_crosskimono/saku_15.jpg" loading="lazy"></a><div class="look-number-label">LOOK 15</div></div>
+            <div class="swiper-slide"><a href="images/Kimonotorso/saku_1.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_1.jpg" loading="lazy"></a><div class="look-number-label">TORSO 01</div></div>
+            <div class="swiper-slide"><a href="images/Kimonotorso/saku_2.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_2.jpg" loading="lazy"></a><div class="look-number-label">TORSO 02</div></div>
+            <div class="swiper-slide"><a href="images/Kimonotorso/saku_3.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_3.jpg" loading="lazy"></a><div class="look-number-label">TORSO 03</div></div>
+            <div class="swiper-slide"><a href="images/Kimonotorso/saku_4.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_4.jpg" loading="lazy"></a><div class="look-number-label">TORSO 04</div></div>
+            <div class="swiper-slide"><a href="images/Kimonotorso/saku_5.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_5.jpg" loading="lazy"></a><div class="look-number-label">TORSO 05</div></div>
+            <div class="swiper-slide"><a href="images/Kimonotorso/saku_6.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_6.jpg" loading="lazy"></a><div class="look-number-label">TORSO 06</div></div>
+            <div class="swiper-slide"><a href="images/Kimonotorso/saku_7.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_7.jpg" loading="lazy"></a><div class="look-number-label">TORSO 07</div></div>
+            <div class="swiper-slide"><a href="images/Kimonotorso/saku_8.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_8.jpg" loading="lazy"></a><div class="look-number-label">TORSO 08</div></div>
+            <div class="swiper-slide"><a href="images/Kimonotorso/saku_9.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_9.jpg" loading="lazy"></a><div class="look-number-label">TORSO 09</div></div>
+            <div class="swiper-slide"><a href="images/Kimonotorso/saku_10.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_10.jpg" loading="lazy"></a><div class="look-number-label">TORSO 10</div></div>
           </div>
         </div>
       </div>
 
-      <!-- CHAPTER 02: GOWN (15枚) -->
+      <!-- CHAPTER 02: GOWN (モデル15枚 + トルソー4枚 = 計19枚) -->
       <div class="collection-row fade-up">
         <div class="collection-heading"><span class="chapter-num">CHAPTER 02</span><h2 class="category-title">Gown</h2></div>
         <div class="swiper swiper-fashion">
@@ -357,11 +360,15 @@
             <div class="swiper-slide"><a href="images/2026_gown/saku_13.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_gown/saku_13.jpg" loading="lazy"></a><div class="look-number-label">LOOK 13</div></div>
             <div class="swiper-slide"><a href="images/2026_gown/saku_14.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_gown/saku_14.jpg" loading="lazy"></a><div class="look-number-label">LOOK 14</div></div>
             <div class="swiper-slide"><a href="images/2026_gown/saku_15.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_gown/saku_15.jpg" loading="lazy"></a><div class="look-number-label">LOOK 15</div></div>
+            <div class="swiper-slide"><a href="images/GaunTorso/saku_1.jpg" data-fancybox="gallery" class="look-item"><img src="images/GaunTorso/saku_1.jpg" loading="lazy"></a><div class="look-number-label">TORSO 01</div></div>
+            <div class="swiper-slide"><a href="images/GaunTorso/saku_2.jpg" data-fancybox="gallery" class="look-item"><img src="images/GaunTorso/saku_2.jpg" loading="lazy"></a><div class="look-number-label">TORSO 02</div></div>
+            <div class="swiper-slide"><a href="images/GaunTorso/saku_3.jpg" data-fancybox="gallery" class="look-item"><img src="images/GaunTorso/saku_3.jpg" loading="lazy"></a><div class="look-number-label">TORSO 03</div></div>
+            <div class="swiper-slide"><a href="images/GaunTorso/saku_4.jpg" data-fancybox="gallery" class="look-item"><img src="images/GaunTorso/saku_4.jpg" loading="lazy"></a><div class="look-number-label">TORSO 04</div></div>
           </div>
         </div>
       </div>
 
-      <!-- CHAPTER 03: HAKAMA (12枚) -->
+      <!-- CHAPTER 03: HAKAMA (モデル12枚) -->
       <div class="collection-row fade-up">
         <div class="collection-heading"><span class="chapter-num">CHAPTER 03</span><h2 class="category-title">Hakama</h2></div>
         <div class="swiper swiper-fashion">
@@ -382,7 +389,7 @@
         </div>
       </div>
 
-      <!-- CHAPTER 04: ROBE (12枚) -->
+      <!-- CHAPTER 04: ROBE (モデル12枚 + トルソー11枚 = 計23枚) -->
       <div class="collection-row fade-up">
         <div class="collection-heading"><span class="chapter-num">CHAPTER 04</span><h2 class="category-title">Robe</h2></div>
         <div class="swiper swiper-fashion">
@@ -399,60 +406,6 @@
             <div class="swiper-slide"><a href="images/2026_robe/saku_10.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_robe/saku_10.jpg" loading="lazy"></a><div class="look-number-label">LOOK 10</div></div>
             <div class="swiper-slide"><a href="images/2026_robe/saku_11.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_robe/saku_11.jpg" loading="lazy"></a><div class="look-number-label">LOOK 11</div></div>
             <div class="swiper-slide"><a href="images/2026_robe/saku_12.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_robe/saku_12.jpg" loading="lazy"></a><div class="look-number-label">LOOK 12</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CHAPTER 05: TONBI (4枚) -->
-      <div class="collection-row fade-up">
-        <div class="collection-heading"><span class="chapter-num">CHAPTER 05</span><h2 class="category-title">Tonbi</h2></div>
-        <div class="swiper swiper-fashion">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><a href="images/2026_tonbi/saku_1.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_tonbi/saku_1.jpg" loading="lazy"></a><div class="look-number-label">LOOK 01</div></div>
-            <div class="swiper-slide"><a href="images/2026_tonbi/saku_2.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_tonbi/saku_2.jpg" loading="lazy"></a><div class="look-number-label">LOOK 02</div></div>
-            <div class="swiper-slide"><a href="images/2026_tonbi/saku_3.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_tonbi/saku_3.jpg" loading="lazy"></a><div class="look-number-label">LOOK 03</div></div>
-            <div class="swiper-slide"><a href="images/2026_tonbi/saku_4.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_tonbi/saku_4.jpg" loading="lazy"></a><div class="look-number-label">LOOK 04</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CHAPTER 06: KIMONO TORSO (10枚) -->
-      <div class="collection-row fade-up">
-        <div class="collection-heading"><span class="chapter-num">CHAPTER 06</span><h2 class="category-title">Kimono Torso</h2></div>
-        <div class="swiper swiper-fashion">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><a href="images/Kimonotorso/saku_1.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_1.jpg" loading="lazy"></a><div class="look-number-label">TORSO 01</div></div>
-            <div class="swiper-slide"><a href="images/Kimonotorso/saku_2.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_2.jpg" loading="lazy"></a><div class="look-number-label">TORSO 02</div></div>
-            <div class="swiper-slide"><a href="images/Kimonotorso/saku_3.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_3.jpg" loading="lazy"></a><div class="look-number-label">TORSO 03</div></div>
-            <div class="swiper-slide"><a href="images/Kimonotorso/saku_4.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_4.jpg" loading="lazy"></a><div class="look-number-label">TORSO 04</div></div>
-            <div class="swiper-slide"><a href="images/Kimonotorso/saku_5.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_5.jpg" loading="lazy"></a><div class="look-number-label">TORSO 05</div></div>
-            <div class="swiper-slide"><a href="images/Kimonotorso/saku_6.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_6.jpg" loading="lazy"></a><div class="look-number-label">TORSO 06</div></div>
-            <div class="swiper-slide"><a href="images/Kimonotorso/saku_7.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_7.jpg" loading="lazy"></a><div class="look-number-label">TORSO 07</div></div>
-            <div class="swiper-slide"><a href="images/Kimonotorso/saku_8.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_8.jpg" loading="lazy"></a><div class="look-number-label">TORSO 08</div></div>
-            <div class="swiper-slide"><a href="images/Kimonotorso/saku_9.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_9.jpg" loading="lazy"></a><div class="look-number-label">TORSO 09</div></div>
-            <div class="swiper-slide"><a href="images/Kimonotorso/saku_10.jpg" data-fancybox="gallery" class="look-item"><img src="images/Kimonotorso/saku_10.jpg" loading="lazy"></a><div class="look-number-label">TORSO 10</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CHAPTER 07: GOWN TORSO (4枚) -->
-      <div class="collection-row fade-up">
-        <div class="collection-heading"><span class="chapter-num">CHAPTER 07</span><h2 class="category-title">Gown Torso</h2></div>
-        <div class="swiper swiper-fashion">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><a href="images/GaunTorso/saku_1.jpg" data-fancybox="gallery" class="look-item"><img src="images/GaunTorso/saku_1.jpg" loading="lazy"></a><div class="look-number-label">TORSO 01</div></div>
-            <div class="swiper-slide"><a href="images/GaunTorso/saku_2.jpg" data-fancybox="gallery" class="look-item"><img src="images/GaunTorso/saku_2.jpg" loading="lazy"></a><div class="look-number-label">TORSO 02</div></div>
-            <div class="swiper-slide"><a href="images/GaunTorso/saku_3.jpg" data-fancybox="gallery" class="look-item"><img src="images/GaunTorso/saku_3.jpg" loading="lazy"></a><div class="look-number-label">TORSO 03</div></div>
-            <div class="swiper-slide"><a href="images/GaunTorso/saku_4.jpg" data-fancybox="gallery" class="look-item"><img src="images/GaunTorso/saku_4.jpg" loading="lazy"></a><div class="look-number-label">TORSO 04</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CHAPTER 08: ROBE TORSO (11枚) -->
-      <div class="collection-row fade-up">
-        <div class="collection-heading"><span class="chapter-num">CHAPTER 08</span><h2 class="category-title">Robe Torso</h2></div>
-        <div class="swiper swiper-fashion">
-          <div class="swiper-wrapper">
             <div class="swiper-slide"><a href="images/robe%20torso/saku_1.jpg" data-fancybox="gallery" class="look-item"><img src="images/robe%20torso/saku_1.jpg" loading="lazy"></a><div class="look-number-label">TORSO 01</div></div>
             <div class="swiper-slide"><a href="images/robe%20torso/saku_2.jpg" data-fancybox="gallery" class="look-item"><img src="images/robe%20torso/saku_2.jpg" loading="lazy"></a><div class="look-number-label">TORSO 02</div></div>
             <div class="swiper-slide"><a href="images/robe%20torso/saku_3.jpg" data-fancybox="gallery" class="look-item"><img src="images/robe%20torso/saku_3.jpg" loading="lazy"></a><div class="look-number-label">TORSO 03</div></div>
@@ -468,9 +421,22 @@
         </div>
       </div>
 
+      <!-- CHAPTER 05: TONBI (モデル4枚) -->
+      <div class="collection-row fade-up">
+        <div class="collection-heading"><span class="chapter-num">CHAPTER 05</span><h2 class="category-title">Tonbi</h2></div>
+        <div class="swiper swiper-fashion">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><a href="images/2026_tonbi/saku_1.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_tonbi/saku_1.jpg" loading="lazy"></a><div class="look-number-label">LOOK 01</div></div>
+            <div class="swiper-slide"><a href="images/2026_tonbi/saku_2.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_tonbi/saku_2.jpg" loading="lazy"></a><div class="look-number-label">LOOK 02</div></div>
+            <div class="swiper-slide"><a href="images/2026_tonbi/saku_3.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_tonbi/saku_3.jpg" loading="lazy"></a><div class="look-number-label">LOOK 03</div></div>
+            <div class="swiper-slide"><a href="images/2026_tonbi/saku_4.jpg" data-fancybox="gallery" class="look-item"><img src="images/2026_tonbi/saku_4.jpg" loading="lazy"></a><div class="look-number-label">LOOK 04</div></div>
+          </div>
+        </div>
+      </div>
+
     </section>
 
-    <!-- 店舗情報 & オンラインストアリンク（新URL設定済み） -->
+    <!-- 店舗情報 & オンラインストアリンク -->
     <section class="store-info-section fade-up">
       <div class="info-inner">
         <div class="stores-grid">
@@ -500,13 +466,11 @@
     <section class="brand-sns-section fade-up">
       <div class="brand-sns-label">OFFICIAL ACCOUNTS</div>
       <div class="brand-sns-links">
-        <!-- Instagram -->
         <a href="https://www.instagram.com/gofukuyasan/" target="_blank" rel="noopener noreferrer" class="brand-sns-btn" title="Instagram @gofukuyasan" aria-label="Instagram">
           <svg viewBox="0 0 24 24">
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
           </svg>
         </a>
-        <!-- X (formerly Twitter) -->
         <a href="https://x.com/kota_20061117/status/2119481650740650347" target="_blank" rel="noopener noreferrer" class="brand-sns-btn" title="X (Twitter)" aria-label="X">
           <svg viewBox="0 0 24 24">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
@@ -515,36 +479,22 @@
       </div>
     </section>
 
-    <!-- クレジット（実データ反映済み） -->
+    <!-- クレジット（リンクなしの純粋なテキスト表記） -->
     <section class="credits-section fade-up">
       <div class="credits-inner">
         <div class="credits-label">CREDITS</div>
         <div class="credits-grid">
-          <!-- Styling / Hairmake -->
           <div class="credit-item">
             <span class="credit-role">STYLING & HAIR-MAKE</span>
-            <a href="https://www.instagram.com/ro_cher/" target="_blank" rel="noopener noreferrer" class="credit-link">
-              <span class="credit-name">岩崎 真美子</span>
-              <span class="credit-handle">@ro_cher</span>
-            </a>
+            <span class="credit-name-text">岩崎 真美子</span>
           </div>
-
-          <!-- Photography -->
           <div class="credit-item">
             <span class="credit-role">PHOTOGRAPHY</span>
-            <a href="https://www.instagram.com/marikohata14/" target="_blank" rel="noopener noreferrer" class="credit-link">
-              <span class="credit-name">秦 真里子</span>
-              <span class="credit-handle">@marikohata14</span>
-            </a>
+            <span class="credit-name-text">秦 真里子</span>
           </div>
-
-          <!-- Model -->
           <div class="credit-item">
             <span class="credit-role">MODEL</span>
-            <a href="https://www.instagram.com/__yuca.____/" target="_blank" rel="noopener noreferrer" class="credit-link">
-              <span class="credit-name">YUKA</span>
-              <span class="credit-handle">@__yuca.____</span>
-            </a>
+            <span class="credit-name-text">YUKA</span>
           </div>
         </div>
       </div>
@@ -566,20 +516,14 @@
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
   <script>
-    // --- 1. JSで全97枚の画像配列を生成＆シャッフル ---
+    // --- 1. トップのヒーロースライダー用（全97枚をシャッフル） ---
     const imagePool = [];
-    
-    // 【衣服画像（モデル着用 58枚）】
     for(let i=1; i<=15; i++) imagePool.push(`images/2026_crosskimono/saku_${i}.jpg`);
     for(let i=1; i<=15; i++) imagePool.push(`images/2026_gown/saku_${i}.jpg`);
     for(let i=1; i<=12; i++) imagePool.push(`images/2026_hakama/saku_${i}.jpg`);
     for(let i=1; i<=12; i++) imagePool.push(`images/2026_robe/saku_${i}.jpg`);
     for(let i=1; i<=4; i++) imagePool.push(`images/2026_tonbi/saku_${i}.jpg`);
-    
-    // 【刺身のつま（風景・雰囲気画像 14枚）】
     for(let i=1; i<=14; i++) imagePool.push(`images/2026_look/saku_${i}.jpg`);
-    
-    // 【トルソー画像（25枚）】
     for(let i=1; i<=10; i++) imagePool.push(`images/Kimonotorso/saku_${i}.jpg`);
     for(let i=1; i<=4; i++) imagePool.push(`images/GaunTorso/saku_${i}.jpg`);
     for(let i=1; i<=11; i++) imagePool.push(`images/robe%20torso/saku_${i}.jpg`);
@@ -593,7 +537,6 @@
     }
     const randomizedImages = shuffleArray(imagePool);
 
-    // --- 2. ヒーロースライダーの構築 ---
     const sliderContainer = document.getElementById('hero-slider');
     let currentSlide = 0;
     
@@ -616,7 +559,7 @@
 
     let slideInterval = setInterval(nextSlide, 4500);
 
-    // --- 3. カスタムカーソル ＆ パララックス ---
+    // --- 2. カスタムカーソル ＆ パララックス ---
     const customCursor = document.getElementById('custom-cursor');
     
     sliderContainer.addEventListener('mouseenter', () => {
@@ -646,10 +589,20 @@
       slideInterval = setInterval(nextSlide, 4500);
     });
 
-    // --- 4. コレクション・スワイプ (Swiper / 全8章) ---
+    // --- 3. コレクション・スライドのDOM完全ランダムシャッフル＆Swiper初期化 ---
     const swiperInstances = [];
-    document.querySelectorAll('.swiper-fashion').forEach(el => {
-      const swiper = new Swiper(el, { 
+    document.querySelectorAll('.swiper-fashion').forEach(slider => {
+      const wrapper = slider.querySelector('.swiper-wrapper');
+      const slideList = Array.from(wrapper.children);
+      
+      // 更新（リロード）のたびにチャプター内のスライド順をシャッフル
+      for (let i = slideList.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [slideList[i], slideList[j]] = [slideList[j], slideList[i]];
+      }
+      slideList.forEach(slide => wrapper.appendChild(slide));
+
+      const swiper = new Swiper(slider, { 
         slidesPerView: "auto", 
         spaceBetween: 40, 
         grabCursor: true, 
@@ -666,7 +619,7 @@
       swiperInstances.forEach(swiper => swiper.update());
     });
 
-    // --- その他の基本スクリプト ---
+    // --- 4. その他の基本スクリプト ---
     window.addEventListener('load', () => {
       setTimeout(() => { document.body.classList.add('loaded'); }, 600);
     });
