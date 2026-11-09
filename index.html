@@ -59,7 +59,6 @@
     .loader-logo {
       position: relative; z-index: 2;
       width: 80vw; max-width: 300px;
-      mix-blend-mode: multiply;
       opacity: 0;
       transform: translateY(15px) scale(0.97);
       transition: opacity 1.4s cubic-bezier(0.2, 1, 0.2, 1), transform 1.4s cubic-bezier(0.2, 1, 0.2, 1);
@@ -68,11 +67,9 @@
       opacity: 1;
       transform: translateY(0) scale(1);
     }
-    /* 背景の白が先に消え、写真の上にロゴが浮かぶ */
     body.fade-bg .preloader-bg {
       opacity: 0;
     }
-    /* 全体完了：ロゴもフェードアウト */
     body.loaded #preloader {
       opacity: 0;
       visibility: hidden;
@@ -98,7 +95,6 @@
     .header-logo-img {
       max-height: 58px;
       width: auto;
-      mix-blend-mode: multiply;
       transition: max-height 0.5s cubic-bezier(0.2, 1, 0.2, 1);
     }
     .scrolled .header-logo-img {
@@ -183,7 +179,6 @@
     @media (max-width: 768px) { .stores-grid { grid-template-columns: 1fr; gap: 60px; } }
     .store-card { padding-top: 30px; border-top: 1px solid var(--text-main); }
     
-    /* さく研究所 ｜ 居内商店 / さく研究所 ｜ ゴフクヤサン（Online Storeと同等サイズ・黒） */
     .store-sublabel {
       display: block;
       font-family: 'Shippori Mincho', serif;
@@ -210,7 +205,6 @@
     .action-card { background: var(--bg-color); padding: 80px 40px; text-align: center; transition: background 0.6s ease; }
     .action-card:hover { background: #f3f3f3; }
     
-    /* さく研究所 / ゴフクヤサン（Online Storeと同等サイズ・黒） */
     .action-sublabel {
       display: block;
       font-family: 'Shippori Mincho', serif;
@@ -313,14 +307,14 @@
   <!-- ローディング（写真の上にフローティング） -->
   <div id="preloader" title="Click to skip">
     <div class="preloader-bg"></div>
-    <img src="images/common/saku_logo.jpg" alt="SAKU KYOTO" class="loader-logo">
+    <img src="images/common/saku_logo.png" alt="SAKU KYOTO" class="loader-logo">
   </div>
 
   <div id="custom-cursor">NEXT</div>
 
   <!-- ヘッダー -->
   <header class="site-header" id="header">
-    <a href="#"><img src="images/common/saku_logo.jpg" alt="SAKU KYOTO" class="header-logo-img"></a>
+    <a href="#"><img src="images/common/saku_logo.png" alt="SAKU KYOTO" class="header-logo-img"></a>
   </header>
 
   <main>
@@ -647,23 +641,19 @@
       swiperInstances.forEach(swiper => swiper.update());
     });
 
-    // --- 4. シネマティック・ロゴオープニング（白背景→写真上フローティング→完了） ---
-    // ステップ1: ロゴを表示
+    // --- 4. シネマティック・ロゴオープニング ---
     setTimeout(() => {
       document.body.classList.add('show-logo');
     }, 150);
 
-    // ステップ2: 約1.4秒後に背景の白が透明化（写真が透けてロゴが写真の上に浮く）
     setTimeout(() => {
       document.body.classList.add('fade-bg');
     }, 1400);
 
-    // ステップ3: 写真の上で約3秒間フロート後、ロゴがフェードアウトしてサイト開始
     setTimeout(() => {
       document.body.classList.add('loaded');
     }, 4500);
 
-    // タップ/クリックで即時スキップ
     document.getElementById('preloader')?.addEventListener('click', () => {
       document.body.classList.add('fade-bg');
       document.body.classList.add('loaded');
