@@ -179,16 +179,60 @@
     @media (max-width: 768px) { .stores-grid { grid-template-columns: 1fr; gap: 60px; } }
     .store-card { padding-top: 30px; border-top: 1px solid var(--text-main); }
     
+    /* --- ブランドロゴ＋テキスト横並びユニット --- */
     .store-sublabel {
-      display: block;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      min-height: 36px;
       font-family: 'Shippori Mincho', serif;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 500;
       letter-spacing: 0.12em;
       color: var(--text-main);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       line-height: 1.4;
     }
+    .brand-unit {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .mini-saku-logo {
+      height: 25px;
+      width: auto;
+      display: block;
+      flex-shrink: 0;
+    }
+    .brand-divider {
+      color: #cccccc;
+      font-weight: 300;
+      font-size: 18px;
+      user-select: none;
+    }
+    /* 居内商店ロゴバナー */
+    .iuchi-logo-link {
+      display: inline-flex;
+      align-items: center;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .iuchi-logo-link:hover {
+      opacity: 0.6;
+      transform: translateY(-1px);
+    }
+    .iuchi-logo-img {
+      height: 30px;
+      width: auto;
+      display: block;
+      mix-blend-mode: multiply; /* JPGの白背景を自然に透過なじませ */
+    }
+    @media (max-width: 480px) {
+      .store-sublabel { font-size: 19px; gap: 10px; }
+      .mini-saku-logo { height: 22px; }
+      .iuchi-logo-img { height: 26px; }
+    }
+
     .store-title {
       font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 400;
       letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 30px;
@@ -206,9 +250,12 @@
     .action-card:hover { background: #f3f3f3; }
     
     .action-sublabel {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 32px;
       font-family: 'Shippori Mincho', serif;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 500;
       letter-spacing: 0.15em;
       color: var(--text-main);
@@ -469,7 +516,16 @@
         <div class="stores-grid">
           <!-- Kyoto Store -->
           <div class="store-card">
-            <span class="store-sublabel">さく研究所 ｜ 居内商店</span>
+            <div class="store-sublabel">
+              <span class="brand-unit">
+                <img src="images/common/saku_logo.png" alt="" class="mini-saku-logo">
+                <span>さく研究所</span>
+              </span>
+              <span class="brand-divider">｜</span>
+              <a href="https://kyoto.gofukuyasan.com/" target="_blank" rel="noopener noreferrer" class="iuchi-logo-link" title="居内商店 公式サイトへ">
+                <img src="images/common/Gemini_Generated_Image_hskdgxhskdgxhskd.jpg" alt="居内商店" class="iuchi-logo-img">
+              </a>
+            </div>
             <h3 class="store-title">Kyoto Store</h3>
             <dl class="store-list">
               <dt>Address</dt><dd>京都市東山区星野町 88-1</dd>
@@ -480,7 +536,14 @@
           </div>
           <!-- Osaka Store -->
           <div class="store-card">
-            <span class="store-sublabel">さく研究所 ｜ ゴフクヤサン</span>
+            <div class="store-sublabel">
+              <span class="brand-unit">
+                <img src="images/common/saku_logo.png" alt="" class="mini-saku-logo">
+                <span>さく研究所</span>
+              </span>
+              <span class="brand-divider">｜</span>
+              <span>ゴフクヤサン</span>
+            </div>
             <h3 class="store-title">Osaka Store</h3>
             <dl class="store-list">
               <dt>Address</dt><dd>大阪市中央区船場中央 3-2-7<br>船場センタービル 7号館 B1F 北側</dd>
@@ -493,12 +556,19 @@
         <!-- Online Store / Contact -->
         <div class="action-links-grid">
           <div class="action-card">
-            <span class="action-sublabel">さく研究所</span>
+            <div class="action-sublabel">
+              <span class="brand-unit">
+                <img src="images/common/saku_logo.png" alt="" class="mini-saku-logo">
+                <span>さく研究所</span>
+              </span>
+            </div>
             <h4>Online Store</h4>
             <a href="https://store.gofukuyasan.com/view/category/saku_kenkyujo" target="_blank" rel="noopener noreferrer" class="button-core">VISIT STORE</a>
           </div>
           <div class="action-card">
-            <span class="action-sublabel">ゴフクヤサン</span>
+            <div class="action-sublabel">
+              <span>ゴフクヤサン</span>
+            </div>
             <h4>Contact</h4>
             <a href="https://store.gofukuyasan.com/html/email.html" target="_blank" rel="noopener noreferrer" class="button-core">SEND MESSAGE</a>
           </div>
