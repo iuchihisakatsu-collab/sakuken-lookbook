@@ -175,9 +175,16 @@
     /* --- 店舗情報 --- */
     .store-info-section { border-top: 1px solid #eaeaea; padding: 150px 5vw; }
     .info-inner { max-width: 1200px; margin: 0 auto; }
-    .stores-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 120px; }
+    .stores-grid { 
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 120px; 
+      align-items: stretch; /* 左右のカード高さを揃える */
+    }
     @media (max-width: 768px) { .stores-grid { grid-template-columns: 1fr; gap: 60px; } }
-    .store-card { padding-top: 30px; border-top: 1px solid var(--text-main); }
+    
+    .store-card { 
+      padding-top: 30px; border-top: 1px solid var(--text-main); 
+      display: flex; flex-direction: column; /* 写真を下揃えするためのflex指定 */
+    }
     
     /* --- ブランドロゴ＋テキスト横並びユニット（文字の底辺ラインを統一） --- */
     .store-sublabel {
@@ -224,7 +231,24 @@
       padding-bottom: 3px;
       user-select: none;
     }
-    /* 居内商店ロゴバナー（約25%拡大・底辺揃え） */
+    /* ゴフクヤサン リンク化クラス */
+    .gofuku-text-link {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 9px;
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.35s ease;
+      line-height: 1;
+    }
+    .gofuku-text-link:hover {
+      opacity: 0.6;
+    }
+    .gofuku-text-link span {
+      padding-bottom: 2px;
+    }
+    
+    /* 居内商店ロゴバナー（約25%拡大・2〜3pxダウンで底辺を完璧に揃える） */
     .iuchi-logo-link {
       display: inline-flex;
       align-items: flex-end;
@@ -233,19 +257,19 @@
     }
     .iuchi-logo-link:hover {
       opacity: 0.6;
-      transform: translateY(-1px);
+      transform: translateY(1px);
     }
     .iuchi-logo-img {
       height: 38px;
       width: auto;
       display: block;
       mix-blend-mode: multiply;
-      transform: translateY(3px); /* 画像内余白を相殺して文字の底辺を揃える */
+      transform: translateY(6px); /* さく研究所の文字高さに合わせる微調整 */
     }
     @media (max-width: 480px) {
       .store-sublabel { font-size: 18px; gap: 10px; min-height: 36px; }
       .mini-saku-logo, .mini-gofuku-logo { height: 22px; }
-      .iuchi-logo-img { height: 32px; transform: translateY(2px); }
+      .iuchi-logo-img { height: 32px; transform: translateY(5px); }
     }
 
     .store-title {
@@ -253,13 +277,19 @@
       letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 24px;
       color: var(--text-muted);
     }
+    
+    .store-list { margin-bottom: 40px; }
+    .store-list dt { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--text-muted); margin-top: 20px; letter-spacing: 0.15em; text-transform: uppercase; }
+    .store-list dd { font-size: 14px; margin: 4px 0 0 0; color: var(--text-main); line-height: 2; letter-spacing: 0.1em; }
+    .store-tel { color: inherit; text-decoration: none; transition: opacity 0.3s ease; }
+    .store-tel:hover { opacity: 0.6; }
 
-    /* --- 店舗外観・内観写真（左右で高さ・比率を統一） --- */
+    /* --- 店舗外観・内観写真（下揃え・一番下に配置） --- */
     .store-photo-wrap {
       width: 100%;
       aspect-ratio: 16 / 10;
       overflow: hidden;
-      margin-bottom: 28px;
+      margin-top: auto; /* 余白を自動計算して強制的に一番下へ押し込む */
       background-color: #f3f3f3;
     }
     .store-photo-wrap img {
@@ -273,11 +303,6 @@
       transform: scale(1.02);
       filter: grayscale(0%);
     }
-
-    .store-list dt { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--text-muted); margin-top: 20px; letter-spacing: 0.15em; text-transform: uppercase; }
-    .store-list dd { font-size: 14px; margin: 4px 0 0 0; color: var(--text-main); line-height: 2; letter-spacing: 0.1em; }
-    .store-tel { color: inherit; text-decoration: none; transition: opacity 0.3s ease; }
-    .store-tel:hover { opacity: 0.6; }
 
     /* --- オンラインストア & コンタクト グリッド --- */
     .action-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #eaeaea; }
@@ -563,15 +588,15 @@
               </a>
             </div>
             <h3 class="store-title">Kyoto Store</h3>
-            <div class="store-photo-wrap">
-              <img src="images/common/tenpokyoto.jpg" alt="Kyoto Store さく研究所｜居内商店" loading="lazy">
-            </div>
             <dl class="store-list">
               <dt>Address</dt><dd>京都市東山区星野町 88-1</dd>
               <dt>Tel</dt><dd><a href="tel:0757481303" class="store-tel">075-748-1303</a></dd>
               <dt>Location</dt><dd>八坂の塔（法観寺）真正面</dd>
               <dt>Hours</dt><dd>11:00 - 19:00</dd>
             </dl>
+            <div class="store-photo-wrap">
+              <img src="images/common/tenpokyoto.jpg" alt="Kyoto Store さく研究所｜居内商店" loading="lazy">
+            </div>
           </div>
 
           <!-- Osaka Store -->
@@ -583,19 +608,21 @@
               </span>
               <span class="brand-divider">｜</span>
               <span class="brand-unit">
-                <img src="images/common/logo22.gif" alt="ゴフクヤサン" class="mini-gofuku-logo">
-                <span>ゴフクヤサン</span>
+                <a href="https://gofukuyasan.com/" target="_blank" rel="noopener noreferrer" class="gofuku-text-link" title="ゴフクヤサン 公式サイトへ">
+                  <img src="images/common/logo22.gif" alt="ゴフクヤサン" class="mini-gofuku-logo">
+                  <span>ゴフクヤサン</span>
+                </a>
               </span>
             </div>
             <h3 class="store-title">Osaka Store</h3>
-            <div class="store-photo-wrap">
-              <img src="images/common/tenpoosaka.jpg" alt="Osaka Store さく研究所｜ゴフクヤサン" loading="lazy">
-            </div>
             <dl class="store-list">
               <dt>Address</dt><dd>大阪市中央区船場中央 3-2-7<br>船場センタービル 7号館 B1F 北側</dd>
               <dt>Tel</dt><dd><a href="tel:0662516611" class="store-tel">06-6251-6611</a></dd>
               <dt>Hours</dt><dd>11:00 - 17:00</dd>
             </dl>
+            <div class="store-photo-wrap">
+              <img src="images/common/tenpoosaka.jpg" alt="Osaka Store さく研究所｜ゴフクヤサン" loading="lazy">
+            </div>
           </div>
         </div>
         
@@ -614,8 +641,10 @@
           <div class="action-card">
             <div class="action-sublabel">
               <span class="brand-unit">
-                <img src="images/common/logo22.gif" alt="ゴフクヤサン" class="mini-gofuku-logo">
-                <span>ゴフクヤサン</span>
+                <a href="https://gofukuyasan.com/" target="_blank" rel="noopener noreferrer" class="gofuku-text-link" title="ゴフクヤサン 公式サイトへ">
+                  <img src="images/common/logo22.gif" alt="ゴフクヤサン" class="mini-gofuku-logo">
+                  <span>ゴフクヤサン</span>
+                </a>
               </span>
             </div>
             <h4>Contact</h4>
@@ -641,6 +670,28 @@
         </a>
       </div>
     </section>
+
+    <!-- （CREDITSセクションは一時非表示のためコメントアウトしています）
+    <section class="credits-section fade-up">
+      <div class="credits-inner">
+        <div class="credits-label">CREDITS</div>
+        <div class="credits-grid">
+          <div class="credit-item">
+            <span class="credit-role">STYLING & HAIR-MAKE</span>
+            <span class="credit-name-text">岩崎 真美子</span>
+          </div>
+          <div class="credit-item">
+            <span class="credit-role">PHOTOGRAPHY</span>
+            <span class="credit-name-text">秦 真里子</span>
+          </div>
+          <div class="credit-item">
+            <span class="credit-role">MODEL</span>
+            <span class="credit-name-text">YUKA</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    -->
   </main>
   
   <footer class="site-footer"><p>&copy; SAKU KYOTO / GOFUKUYASAN.</p></footer>
